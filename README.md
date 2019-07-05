@@ -36,8 +36,8 @@ _Add instructions on how to help working on the plugin (e.g. npm setup, Composer
 
 ## License
 
-MIT
+MIT, [see license](https://github.com/hananils/kirby-colors/blob/master/LICENSE)
 
 ## Credits
 
--   [hana+nils · Büro für Gestaltung](https://hananils.de)
+Thanks to [Brian Grinstead](https://briangrinstead.com/) and [Scott Cooper](https://github.com/scttcper) for providing the [TinyColor library](https://github.com/TypeCtrl/tinycolor).
