@@ -121,7 +121,9 @@ export default {
     },
     computed: {
         hex() {
-            return this.color.toHex();
+            if (this.color.originalInput !== '') {
+                return this.color.toHex();
+            }
         },
         rgb() {
             return this.color.toRgb();

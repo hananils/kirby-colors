@@ -23,10 +23,14 @@ export default {
     },
     computed: {
         value() {
-            return '#' + this.color.toHex8();
+            if (this.color.originalInput !== '') {
+                return '#' + this.color.toHex8();
+            }
         },
         hex() {
-            return '#' + this.color.toHex();
+            if (this.color.originalInput !== '') {
+                return '#' + this.color.toHex();
+            }
         }
     },
     methods: {

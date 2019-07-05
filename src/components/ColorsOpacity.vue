@@ -32,7 +32,7 @@ export default {
             let opacity = parseInt(value, 10) / 100;
             let space;
 
-            if (this.color.format.indexOf('hex') > -1) {
+            if (this.color.format && this.color.format.indexOf('hex') > -1) {
                 space = 'hex8';
             }
 
