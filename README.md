@@ -77,6 +77,13 @@ colors:
 -   `$field->toColor()`: returns the chosen color.
 -   `$field->toReadableColor()`: returns the readable color.
 
+## Tips and tricks
+
+1. Click on the left color preview to open the color picker.
+2. Click the arrow icon to switch between color spaces.
+3. When editing RGB or HSL colors, use the up and down arrow keys to adjust the value by +1 or -1.
+4. Hold the [meta key](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey) to adjust values by +10 or -10.
+
 ## Development
 
 This plugin is based on the official [Kirby plugin kit](https://github.com/getkirby/pluginkit/tree/4-panel).
