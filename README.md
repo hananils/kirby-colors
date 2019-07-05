@@ -1,21 +1,25 @@
 # Kirby Colors
 
+Colors is a field for Kirby 3 that allows the selection of a color using the native color selector. Colors can be viewed and edited in either HEX, RGB or HSL.
+
+Additionally, the field offers the automatic selection of the most contrasty color from a given list. This can be useful, if you'd like to specify per page background colors and would like to adjust the text colors accordingly. The field displays the color contrast ratings AA, AALarge, AAA and AAALarge according to WCAG accessibility guidelines.
+
 ## Installation
 
 ### Download
 
-Download and copy this repository to `/site/plugins/{{ plugin-name }}`.
+Download and copy this repository to `/site/plugins/colors`.
 
 ### Git submodule
 
 ```
-git submodule add https://github.com/{{ your-name }}/{{ plugin-name }}.git site/plugins/{{ plugin-name }}
+git submodule add https://github.com/hananils/kirby-colors.git site/plugins/colors
 ```
 
 ### Composer
 
 ```
-composer require {{ your-name }}/{{ plugin-name }}
+composer require hananils/kirby-colors
 ```
 
 ## Setup
@@ -36,4 +40,4 @@ MIT
 
 ## Credits
 
--   [Your Name](https://github.com/ghost)
+-   [hana+nils · Büro für Gestaltung](https://hananils.de)
