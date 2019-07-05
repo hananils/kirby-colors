@@ -78,11 +78,6 @@ export default {
         store(value) {
             let contrast = this.getContrast(value);
 
-            console.log({
-                color: value,
-                contrast: contrast
-            });
-
             this.$emit('input', {
                 color: value,
                 contrast: contrast
