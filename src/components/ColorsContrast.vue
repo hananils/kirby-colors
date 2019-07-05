@@ -26,7 +26,7 @@ export default {
         readable() {
             let colors = this.contrast;
 
-            if (!colors) {
+            if (colors === true) {
                 colors = ['#fff', '#000'];
             }
 
