@@ -75,7 +75,7 @@ This plugin is based on the official [Kirby plugin kit](https://github.com/getki
 
 ## Alternatives
 
-Please note that there is another color field for Kirby 3 developed by Tim Ötting called Kirby Color, see <https://github.com/TimOetting/kirby-color>. There is also an extended fork of the same plugin maintained by Sylvain Jule at <https://github.com/sylvainjule/kirby-color>.
+Please note that there is another color field for Kirby 3 developed by Tim Ötting called Kirby Color, see <https://github.com/TimOetting/kirby-color>. There is also an extended fork of the same plugin maintained by Sylvain Julé at <https://github.com/sylvainjule/kirby-color>.
 
 ## License
 
