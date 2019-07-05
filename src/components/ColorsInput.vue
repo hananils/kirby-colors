@@ -140,7 +140,11 @@ export default {
     },
     methods: {
         store(value, input) {
-            let color = '#' + value;
+            let color = value;
+
+            if (color.indexOf('#') === -1) {
+                color = '#' + color;
+            }
 
             if (this.space === 'rgb') {
                 color = {
