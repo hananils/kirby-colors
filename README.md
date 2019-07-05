@@ -30,7 +30,7 @@ This field is provided under the type `colors`:
 
 ### Examples
 
-<img src="https://github.com/hananils/kirby-colors/raw/master/screenshots/kirby-color_example1.png" alt="example 1" style="max-width: 373px;">
+![example 1](https://github.com/hananils/kirby-colors/blob/master/screenshots/kirby-color_example1.png)
 
 ```yml
 colors:
@@ -38,7 +38,7 @@ colors:
     label: Colors
 ```
 
-<img src="https://github.com/hananils/kirby-colors/raw/master/screenshots/kirby-color_example2.png" alt="example 2" style="max-width: 373px;">
+![example 2](https://github.com/hananils/kirby-colors/blob/master/screenshots/kirby-color_example2.png)
 
 ```yml
 colors:
@@ -47,7 +47,7 @@ colors:
     alpha: true
 ```
 
-<img src="https://github.com/hananils/kirby-colors/raw/master/screenshots/kirby-color_example3.png" alt="example 3" style="max-width: 373px;">
+![example 3](https://github.com/hananils/kirby-colors/blob/master/screenshots/kirby-color_example3.png)
 
 ```yml
 colors:
@@ -57,7 +57,7 @@ colors:
     contrast: true
 ```
 
-<img src="https://github.com/hananils/kirby-colors/raw/master/screenshots/kirby-color_example4.png" alt="example 4" style="max-width: 373px;">
+![example 4](https://github.com/hananils/kirby-colors/blob/master/screenshots/kirby-color_example4.png)
 
 ```yml
 colors:
