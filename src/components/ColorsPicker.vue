@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { TinyColor } from '@ctrl/tinycolor';
+
 export default {
     props: {
         color: Object
@@ -34,8 +36,8 @@ export default {
                 return;
             }
 
-            let color = tinycolor(event.target.value);
-            let space = this.color.getFormat();
+            let color = new TinyColor(event.target.value);
+            let space = this.color.format;
 
             color.setAlpha(this.color.getAlpha());
 

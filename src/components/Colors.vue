@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { TinyColor, mostReadable } from '@ctrl/tinycolor';
+
 export default {
     inheritAttrs: false,
     props: {
@@ -56,13 +58,13 @@ export default {
                 value = this.default;
             }
 
-            return tinycolor(value);
+            return new TinyColor(value);
         },
         contrast() {
             return this.value.contrast;
         },
         space() {
-            return this.color.getFormat();
+            return this.color.format;
         }
     },
     methods: {
@@ -97,7 +99,7 @@ export default {
                 colors = ['#fff', '#000'];
             }
 
-            return tinycolor.mostReadable(this.color, colors);
+            return mostReadable(this.color, colors);
         }
     }
 };

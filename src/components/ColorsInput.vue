@@ -110,6 +110,7 @@
 </template>
 
 <script>
+import { TinyColor } from '@ctrl/tinycolor';
 import input from '../mixins/input';
 
 export default {
@@ -158,7 +159,7 @@ export default {
                 color[input.dataset.unit] = value;
             }
 
-            color = tinycolor(color);
+            color = new TinyColor(color);
             color.setAlpha(this.color.getAlpha());
 
             this.$emit('input', color.toString());

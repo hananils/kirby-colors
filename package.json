@@ -8,10 +8,12 @@
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.0",
+    "cssnano": "^4.1.10",
     "sass": "^1.22.1",
     "vue-template-compiler": "^2.6.10"
   },
   "dependencies": {
+    "@ctrl/tinycolor": "^2.5.2",
     "tinycolor2": "^1.4.1",
     "vue": "^2.6.10",
     "vue-hot-reload-api": "^2.3.3"
