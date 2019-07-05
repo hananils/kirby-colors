@@ -18,7 +18,7 @@
             <k-colors-input :color="color" :space="space" @input="onInput" />
             <k-colors-opacity
                 :color="color"
-                v-if="opacity !== false"
+                v-if="alpha !== false"
                 @change-opacity="onChangeOpacity"
             />
             <k-colors-spaces :space="space" @change-space="onChangeSpace" />
@@ -40,31 +40,30 @@ export default {
     props: {
         name: [String, Number],
         label: String,
-        default: {
-            type: String,
-            default: '#fff'
-        },
-        value: Object,
-        contrast: [Boolean, Object],
-        invalid: Boolean
+        default: String,
+        value: Array,
+        contrast: Object,
+        readability: Boolean,
+        alpha: Boolean,
+        invalid: Boolean,
+        disabled: Boolean,
+        required: Boolean,
+        help: String
     },
     computed: {
         color() {
             let value;
 
-            if ('color' in this.value) {
-                value = this.value.color;
+            if (this.value.length) {
+                value = this.value[0];
             } else {
                 value = this.default;
             }
 
             return new TinyColor(value);
         },
-        contrast() {
-            return this.value.contrast;
-        },
         space() {
-            return this.color.format;
+            return this.color.format ? this.color.format : 'hex';
         }
     },
     methods: {
@@ -80,10 +79,7 @@ export default {
         store(value) {
             let contrast = this.getContrast(value);
 
-            this.$emit('input', {
-                color: value,
-                contrast: contrast
-            });
+            this.$emit('input', [value, contrast]);
         },
         getContrast(value) {
             let contrast = this.readable(value);
