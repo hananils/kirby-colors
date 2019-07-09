@@ -38,11 +38,21 @@ Kirby::plugin('hananils/colors', [
         },
         'toColor' => function ($field) {
             $colors = $field->toColors();
-            return $colors[0];
+
+            if (isset($colors[0])) {
+                return $colors[0];
+            }
+
+            return null;
         },
         'toReadableColor' => function ($field) {
             $colors = $field->toColors($field);
-            return $colors[1];
+
+            if (isset($colors[1])) {
+                return $colors[1];
+            }
+
+            return null;
         }
     ]
 ]);
