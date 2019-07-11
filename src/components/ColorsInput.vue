@@ -210,6 +210,7 @@ export default {
     font-size: 1rem;
     border: none;
     outline: none;
+    background: transparent;
 }
 
 .k-colors-input:focus,
