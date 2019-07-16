@@ -1,12 +1,31 @@
 <?php
 
+@include_once __DIR__ . '/vendor/autoload.php';
+
+use Hananils\Colors;
+
+function getValue($value = null)
+{
+    if (!$value) {
+        return;
+    }
+
+    $value = Yaml::decode($value);
+
+    if (is_array($value)) {
+        $value = $value[0];
+    }
+
+    return $value;
+}
+
 Kirby::plugin('hananils/colors', [
     'fields' => [
         'colors' => [
             'props' => [
                 'value' => function ($value = null) {
-                    return Yaml::decode($value);
-                },
+                    return getValue($value);
+                };
                 'help' => function ($help = null) {
                     return $help;
                 },
@@ -16,43 +35,51 @@ Kirby::plugin('hananils/colors', [
                 'contrast' => function ($contrast = false) {
                     return $contrast;
                 }
-            ],
-            'save' => function ($value) {
-                return Yaml::encode($value);
-            }
+            ]
         ]
     ],
     'fieldMethods' => [
         'isHex' => function ($field) {
-            $color = $field->toColor();
-            return strpos($color, '#') === 0;
+            $value = getValue($field->value);
+            return Colors::isHex($value);
         },
         'isRgb' => function ($field) {
-            return strpos($field->value, 'rgb') === 0;
+            $value = getValue($field->value);
+            return Colors::isRgb($value);
         },
         'isHsl' => function ($field) {
-            return strpos($field->value, 'hsl') === 0;
+            $value = getValue($field->value);
+            return Colors::isHsl($value);
         },
-        'toColors' => function ($field) {
-            return Yaml::decode($field->value);
+        'toSpace' => function ($field) {
+            $value = getValue($field->value);
+            $color = new Colors($value);
+
+            return $color->toSpace();
+        },
+        'toObject' => function ($field) {
+            $value = getValue($field->value);
+            $color = new Colors($value);
+
+            return $color->toObject();
         },
         'toColor' => function ($field) {
-            $colors = $field->toColors();
+            $value = getValue($field->value);
+            $color = new Colors($value);
 
-            if (isset($colors[0])) {
-                return $colors[0];
-            }
-
-            return null;
+            return $color->toColor();
         },
-        'toReadableColor' => function ($field) {
-            $colors = $field->toColors($field);
+        'toMostReadable' => function ($field) {
+            $value = getValue($field->value);
+            $color = new Colors($value);
+            $readable = $color->getMostReadable();
+            $format = 'hex';
 
-            if (isset($colors[1])) {
-                return $colors[1];
+            if ($color->hasAlpha()) {
+                $format = 'hex8';
             }
 
-            return null;
+            return $readable[1]['color']->toColor($format);
         }
     ]
 ]);
