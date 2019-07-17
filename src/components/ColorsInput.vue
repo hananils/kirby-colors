@@ -110,65 +110,67 @@
 </template>
 
 <script>
-import { TinyColor } from '@ctrl/tinycolor';
 import input from '../mixins/input';
 
 export default {
     mixins: [input],
     props: {
-        color: Object,
+        color: {
+            validator: function(value) {
+                value instanceof Color;
+            }
+        },
         space: String
     },
     computed: {
         hex() {
-            if (this.color.originalInput !== '') {
-                return this.color.toHex();
+            if (
+                this.color.toOriginal() !== '' ||
+                this.color.getSpace() !== 'hex'
+            ) {
+                return this.color.toString('hex').substr(1, 6);
             }
         },
         rgb() {
             return this.color.toRgb();
         },
         hsl() {
-            let hsl = this.color.toHsl();
-
-            hsl.h = Math.round(hsl.h);
-            hsl.s = Math.round(hsl.s * 100);
-            hsl.l = Math.round(hsl.l * 100);
-
-            return hsl;
+            return this.color.toHsl();
         }
     },
     methods: {
         store(value, input) {
-            let color = value;
-
-            if (color.indexOf('#') === -1) {
-                color = '#' + color;
-            }
-
-            if (this.space === 'rgb') {
-                color = {
-                    r: this.$refs.r.value,
-                    g: this.$refs.g.value,
-                    b: this.$refs.b.value
-                };
-            } else if (this.space === 'hsl') {
-                color = {
-                    h: this.$refs.h.value,
-                    s: this.$refs.s.value,
-                    l: this.$refs.l.value
-                };
-            }
+            const fields = this.$refs;
+            let values = {};
 
             // Set value from arrow interactions
             if (input) {
-                color[input.dataset.unit] = value;
+                values[input.dataset.unit] = value;
             }
 
-            color = new TinyColor(color);
-            color.setAlpha(this.color.getAlpha());
+            switch (this.space) {
+                case 'hex':
+                    let string = value.replace(/[#; ]/g, '');
+                    values = string.match(/.{2}/g);
+                    this.color.setHex(values);
+                    break;
+                case 'rgb':
+                    this.color.setRgb([
+                        fields.r.value,
+                        fields.g.value,
+                        fields.b.value
+                    ]);
+                    break;
+                case 'hsl':
+                    this.color.setHsl([
+                        fields.h.value,
+                        fields.s.value,
+                        fields.l.value
+                    ]);
+                    break;
+            }
 
-            this.$emit('input', color.toString());
+            this.$emit('input', this.color.toString());
         }
     }
 };

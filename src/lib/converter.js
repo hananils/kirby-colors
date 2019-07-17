@@ -11,9 +11,9 @@ class Converter {
      * See: https://www.w3.org/TR/2011/REC-css3-color-20110607/#hsl-color
      */
     convertHslToRgb() {
-        const hue = this.hue / 360;
-        const saturation = this.saturation / 100;
-        const lightness = this.lightness / 100;
+        const hue = this.h / 360;
+        const saturation = this.s / 100;
+        const lightness = this.l / 100;
 
         let red = lightness;
         let green = lightness;
@@ -34,9 +34,9 @@ class Converter {
             blue = this.convertHueToRgb(m1, m2, hue - 1 / 3);
         }
 
-        this.red = red * 255;
-        this.green = green * 255;
-        this.blue = blue * 255;
+        this.r = red * 255;
+        this.g = green * 255;
+        this.b = blue * 255;
     }
 
     /**
@@ -52,28 +52,27 @@ class Converter {
         }
 
         if (hue < 1 / 6) {
-            return p + (q - p) * 6 * hue;
+            return m1 + (m2 - m1) * 6 * hue;
         }
 
         if (hue < 1 / 2) {
-            return q;
+            return m2;
         }
 
         if (hue < 2 / 3) {
-            return p + (q - p) * (2 / 3 - hue) * 6;
+            return m1 + (m2 - m1) * (2 / 3 - hue) * 6;
         }
 
-        return p;
+        return m1;
     }
 
     convertRgbToHsl() {
-        const red = this.red / 255;
-        const green = this.green / 255;
-        const blue = this.blue / 255;
+        const red = this.r / 255;
+        const green = this.g / 255;
+        const blue = this.b / 255;
 
-        max = max(red, green, blue);
-        min = min(red, green, blue);
-
+        const max = Math.max(red, green, blue);
+        const min = Math.min(red, green, blue);
         const add = max + min;
         const sub = max - min;
 
@@ -113,9 +112,46 @@ class Converter {
             hue += 360;
         }
 
-        this.hue = hue;
-        this.saturation = saturation * 100;
-        this.lightness = lightness * 100;
+        this.h = hue;
+        this.s = saturation * 100;
+        this.l = lightness * 100;
+    }
+
+    convertValueToDecimal(value) {
+        let number = parseFloat(value);
+
+        if (number < 1 && value.toString().indexOf('%') === -1) {
+            number = number * 100;
+        }
+
+        return number;
+    }
+
+    convertDecimalToHex(number, pad = true) {
+        let hex = Math.round(number).toString(16);
+
+        if (pad) {
+            hex = hex.padStart(2, '0');
+        }
+
+        return hex;
+    }
+
+    convertHexToDecimal(hex) {
+        return parseInt(hex, 16);
+    }
+
+    convertToFloat(number) {
+        return Math.round(number) / 100;
+    }
+
+    rebaseDecimalForHex(number) {
+        return Math.round((number / 100) * 255);
+    }
+
+    rebaseHexForDecimal(hex) {
+        const decimal = this.convertHexToDecimal(hex);
+        return Math.round((decimal / 255) * 100);
     }
 }
 

@@ -7,13 +7,13 @@ use Hananils\Spaces\Hex;
 use Hananils\Spaces\Hsl;
 use Hananils\Spaces\Rgb;
 
-class Colors
+class Color
 {
     private $space;
 
     public function __construct($color)
     {
-        if (is_a($color, 'Hananils\Colors')) {
+        if (is_a($color, 'Hananils\Color')) {
             $this->space = $color->toSpace();
         } elseif ($this->isHex($color)) {
             $this->space = new Hex($color);

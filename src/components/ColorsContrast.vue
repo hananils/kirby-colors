@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import { readability, mostReadable } from '@ctrl/tinycolor';
-
 export default {
     props: {
         color: Object,
@@ -30,26 +28,24 @@ export default {
                 colors = ['#fff', '#000'];
             }
 
-            return mostReadable(this.color, colors);
+            return this.color.toMostReadable(this.color, colors);
         },
         rating() {
-            let score = readability(this.color, this.readable);
-            let rating = 'AALarge';
-
-            if (score >= 7) {
-                rating = 'AAA';
-            } else if (score >= 4.5) {
-                rating = 'AA / AAALarge';
-            }
-
-            return rating;
+            // let score = readability(this.color, this.readable);
+            // let rating = 'AALarge';
+            // if (score >= 7) {
+            //     rating = 'AAA';
+            // } else if (score >= 4.5) {
+            //     rating = 'AA / AAALarge';
+            // }
+            // return rating;
         },
         value() {
             if (!this.readable) {
                 return;
             }
 
-            return this.readable.toString();
+            return this.readable[0].color.toString();
         }
     }
 };

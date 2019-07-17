@@ -24,8 +24,8 @@ Kirby::plugin('hananils/colors', [
         'colors' => [
             'props' => [
                 'value' => function ($value = null) {
-                    return getValue($value);
-                };
+                    return $value;
+                },
                 'help' => function ($help = null) {
                     return $help;
                 },
@@ -35,7 +35,10 @@ Kirby::plugin('hananils/colors', [
                 'contrast' => function ($contrast = false) {
                     return $contrast;
                 }
-            ]
+            ],
+            'save' => function ($value) {
+                return $value;
+            }
         ]
     ],
     'fieldMethods' => [

@@ -2,7 +2,7 @@
 
 namespace Hananils;
 
-use Hananils\Colors;
+use Hananils\Color;
 
 /**
  * Compares colors and generates an accessibility report following the
@@ -20,10 +20,10 @@ class Readability
 
     public function __construct($color = '#fff', $combinations = ['#fff', '#000'])
     {
-        $this->color = new Colors($color);
+        $this->color = new Color($color);
 
         foreach ($combinations as $combination) {
-            $color = new Colors($combination);
+            $color = new Color($combination);
             $ratio = $this->setContrastRatio($color);
             $rating = $this->setRating($ratio);
 

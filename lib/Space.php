@@ -17,7 +17,7 @@ class Space
 
     public function __construct($string)
     {
-        if (!$this->inSpace($string)) {
+        if (!$this::inSpace($string)) {
             return false;
         }
 

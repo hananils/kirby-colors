@@ -1,4 +1,4 @@
-import Colors from './colors';
+import Color from './color';
 
 /**
  * Compares colors and generates an accessibility report following the
@@ -10,12 +10,12 @@ import Colors from './colors';
  */
 class Readability {
     constructor(color = '#fff', combinations = ['#fff', '#000']) {
-        this.color = new Colors(color);
+        this.color = new Color(color);
         this.combinations = [];
         this.highest = 0;
 
         combinations.forEach(function(combination) {
-            let color = new Colors(combination);
+            let color = new Color(combination);
             let ratio = this.setContrastRatio(color);
             let rating = this.setRating(ratio);
 
@@ -24,7 +24,7 @@ class Readability {
                 contrast: ratio,
                 accessibility: rating
             });
-        });
+        }, this);
     }
 
     setContrastRatio(combination) {
@@ -42,7 +42,7 @@ class Readability {
      * See: https://www.w3.org/TR/WCAG20/#visual-audio-contrast
      */
     setRating(ratio) {
-        ratings = [];
+        let ratings = [];
 
         if (ratio >= 4.5) {
             ratings.push('aa');
@@ -74,11 +74,11 @@ class Readability {
      * See: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
      */
     getLuminance(color) {
-        let values = color.toObject();
+        let values = color.toValues();
 
-        const red = values.red / 255;
-        const green = values.green / 255;
-        const blue = values.blue / 255;
+        const red = values.r / 255;
+        const green = values.g / 255;
+        const blue = values.b / 255;
 
         let r;
         let g;
@@ -124,7 +124,7 @@ class Readability {
      * Output
      */
 
-    toObject() {
+    toReport() {
         let report = {
             color: this.color,
             combinations: this.combinations
@@ -134,11 +134,11 @@ class Readability {
     }
 
     toMostReadable() {
-        let combinations = this.combinations.sort(this.sortCombinations);
+        // let combinations = this.combinations.sort(this.sortCombinations);
 
         let best = this.combinations.filter(function(combination) {
-            return count(combination['accessibility']) === this.highest;
-        });
+            return combination['accessibility'].length === this.highest;
+        }, this);
 
         return best;
     }
