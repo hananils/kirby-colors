@@ -36,15 +36,15 @@ class Color extends Converter {
      * Checks
      */
 
-    isHex(string) {
+    isHex(string = '') {
         return string.indexOf('#') === 0;
     }
 
-    isRgb(string) {
+    isRgb(string = '') {
         return string.indexOf('rgb') === 0;
     }
 
-    isHsl(string) {
+    isHsl(string = '') {
         return string.indexOf('hsl') === 0;
     }
 
