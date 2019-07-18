@@ -22,7 +22,7 @@ class Color
     {
         if (is_a($color, 'Hananils\Color')) {
             $values = $color->toValues();
-            $color->setValues();
+            $color->setValues($values);
         } elseif ($this->isHex($color)) {
             $this->space = 'hex';
             $this->parseHex($color);
@@ -43,16 +43,28 @@ class Color
 
     public function isHex($string)
     {
+        if (!$string) {
+            return false;
+        }
+
         return strpos($string, '#') === 0;
     }
 
     public function isRgb($string)
     {
+        if (!$string) {
+            return false;
+        }
+
         return strpos($string, 'rgb') === 0;
     }
 
     public function isHsl($string)
     {
+        if (!$string) {
+            return false;
+        }
+
         return strpos($string, 'hsl') === 0;
     }
 
@@ -104,6 +116,7 @@ class Color
     public function setDefault()
     {
         $this->setValues([
+            'original' => null,
             'space' => 'hex',
             'r' => 255,
             'g' => 255,
@@ -230,11 +243,6 @@ class Color
      * Getters
      */
 
-    public function getSpace()
-    {
-        return $this->space;
-    }
-
     public function getAlpha()
     {
         return $this->a;
@@ -246,13 +254,13 @@ class Color
 
     public function toReadabilityReport($combinations = ['#fff', '#000'])
     {
-        $readability = new Readability($combinations);
+        $readability = new Readability($this, $combinations);
         return $readability->toReport();
     }
 
     public function toMostReadable($combinations = ['#fff', '#000'])
     {
-        $readability = new Readability($combinations);
+        $readability = new Readability($this, $combinations);
         return $readability->toMostReadable();
     }
 
@@ -265,9 +273,14 @@ class Color
         return $this->original;
     }
 
+    public function toSpace()
+    {
+        return $this->space;
+    }
+
     public function toValues()
     {
-        return {
+        return [
             'original' => $this->original,
             'space' => $this->space,
             'r' => $this->r,
@@ -276,69 +289,69 @@ class Color
             'h' => $this->h,
             's' => $this->s,
             'l' => $this->l,
-            'a' => $this->a;
-        };
+            'a' => $this->a
+        ];
     }
 
     public function toHex()
     {
-        return {
+        return [
             'r' => $this->convertDecimalToHex($this->r),
             'g' => $this->convertDecimalToHex($this->g),
             'b' => $this->convertDecimalToHex($this->b),
-            'a' => $this->convertDecimalToHex($this->rebaseDecimalForHex($this->a));
-        };
+            'a' => $this->convertDecimalToHex($this->rebaseDecimalForHex($this->a))
+        ];
     }
 
     public function toRgb()
     {
-        return {
+        return [
             'r' => round($this->r),
             'g' => round($this->g),
             'b' => round($this->b),
-            'a' => $this->convertToFloat($this->a);
-        };
+            'a' => $this->convertToFloat($this->a)
+        ];
     }
 
     public function toHsl()
     {
-        return {
-            'h' => round($this->h),
+        return
+            ['h' => round($this->h),
             's' => round($this->s),
             'l' => round($this->l),
-            'a' => $this->convertToFloat($this->a);
-        };
+            'a' => $this->convertToFloat($this->a)
+        ];
     }
 
     public function toString($format = null)
     {
         if (!$format) {
-            $format = $this->getSpace();
+            $format = $this->toSpace();
         }
 
         if (strpos($format, 'hsl') === 0) {
             $hsl = $this->toHsl();
 
-            if ($this-> < 100) {
-                return "hsla({$h}, {$}%, {$l}%, {$a})";
+            if ($this->a < 100) {
+                return "hsla({$hsl['h']}, {$hsl['s']}%, {$hsl['l']}%, {$hsl['a']})";
             } else {
-                return "hsla({$h}, {$}%, {$l}%})";
+                return "hsla({$hsl['h']}, {$hsl['s']}%, {$hsl['l']}%})";
             }
         } elseif (strpos($format, 'rgb') === 0) {
             $rgb = $this->toRgb();
 
-            if ($this-> < 100) {
-                return "rgba({$r}, {$g}, {$b}, {$a})";
+            if ($this->a < 100) {
+                return "rgba({$rgb['r']}, {$rgb['g']}, {$rgb['b']}, {$rgb['a']})";
             } else {
-                return "rgb({$r}, {$g}, {$b})";
+                return "rgb({$rgb['r']}, {$rgb['g']}, {$rgb['b']})";
             }
         } else {
             $hex = $this->toHex();
 
-            if ($this-> < 100) {
-                return "#{$r} {$g}{$b}{$a}";
+            if ($this->a < 100) {
+                return "#{$hex['r']} {$hex['g']}{$hex['b']}{$hex['a']}";
             } else {
-                return "#{$r}{$g}{$b}";
+                return "#{$hex['r']}{$hex['g']}{$hex['b']}";
             }
         }
     }

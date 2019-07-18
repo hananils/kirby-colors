@@ -132,7 +132,7 @@ trait Converter
 
     public function convertDecimalToHex($number, $pad = true)
     {
-        $hex = dechex(round(number));
+        $hex = dechex(round($number));
 
         if ($pad) {
             $hex = str_pad($hex, 2, '0');

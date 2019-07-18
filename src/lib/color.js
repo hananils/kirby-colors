@@ -36,15 +36,27 @@ class Color extends Converter {
      * Checks
      */
 
-    isHex(string = '') {
+    isHex(string) {
+        if (!string) {
+            return false;
+        }
+
         return string.indexOf('#') === 0;
     }
 
-    isRgb(string = '') {
+    isRgb(string) {
+        if (!string) {
+            return false;
+        }
+
         return string.indexOf('rgb') === 0;
     }
 
-    isHsl(string = '') {
+    isHsl(string) {
+        if (!string) {
+            return false;
+        }
+
         return string.indexOf('hsl') === 0;
     }
 
@@ -92,6 +104,7 @@ class Color extends Converter {
 
     setDefault() {
         this.setValues({
+            original: null,
             space: 'hex',
             r: 255,
             g: 255,
@@ -206,10 +219,6 @@ class Color extends Converter {
      * Getters
      */
 
-    getSpace() {
-        return this.space;
-    }
-
     getAlpha() {
         return this.a;
     }
@@ -219,12 +228,12 @@ class Color extends Converter {
      */
 
     toReadabilityReport(combinations = ['#fff', '#000']) {
-        let readability = new Readability(combinations);
+        let readability = new Readability(this, combinations);
         return readability.toReport();
     }
 
     toMostReadable(combinations = ['#fff', '#000']) {
-        let readability = new Readability(combinations);
+        let readability = new Readability(this, combinations);
         return readability.toMostReadable();
     }
 
@@ -234,6 +243,10 @@ class Color extends Converter {
 
     toOriginal() {
         return this.original;
+    }
+
+    toSpace() {
+        return this.space;
     }
 
     toValues() {
@@ -279,7 +292,7 @@ class Color extends Converter {
 
     toString(format = null) {
         if (!format) {
-            format = this.getSpace();
+            format = this.toSpace();
         }
 
         if (format.indexOf('hsl') === 0) {

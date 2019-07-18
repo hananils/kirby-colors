@@ -82,7 +82,7 @@ class Readability
      */
     public function getLuminance($color)
     {
-        $values = $color->toObject();
+        $values = $color->toValues();
         $red = $values['r'] / 255;
         $green = $values['g'] / 255;
         $blue = $values['b'] / 255;
