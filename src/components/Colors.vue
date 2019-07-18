@@ -40,7 +40,6 @@ export default {
     props: {
         name: [String, Number],
         label: String,
-        default: String,
         value: Array,
         contrast: Object,
         readability: Boolean,
@@ -52,18 +51,10 @@ export default {
     },
     computed: {
         color() {
-            let value;
-
-            if (this.value) {
-                value = this.value;
-            } else {
-                value = this.default;
-            }
-
-            return new Color(value);
+            return new Color(this.value);
         },
         space() {
-            return this.color.getSpace();
+            return this.color.toSpace();
         }
     },
     methods: {

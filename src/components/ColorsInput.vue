@@ -124,10 +124,7 @@ export default {
     },
     computed: {
         hex() {
-            if (
-                this.color.toOriginal() !== '' ||
-                this.color.getSpace() !== 'hex'
-            ) {
+            if (this.color.toOriginal()) {
                 return this.color.toString('hex').substr(1, 6);
             }
         },
@@ -143,6 +140,11 @@ export default {
             const fields = this.$refs;
             let values = {};
 
+            if (!value) {
+                this.$emit('input', '');
+                return;
+            }
+
             // Set value from arrow interactions
             if (input) {
                 values[input.dataset.unit] = value;
@@ -150,9 +152,7 @@ export default {
 
             switch (this.space) {
                 case 'hex':
-                    let string = value.replace(/[#; ]/g, '');
-                    values = string.match(/.{2}/g);
-                    this.color.setHex(values);
+                    this.color.parseHex(value);
                     break;
                 case 'rgb':
                     this.color.setRgb([

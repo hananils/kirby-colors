@@ -23,18 +23,12 @@ export default {
     },
     computed: {
         value() {
-            if (
-                this.color.toOriginal() !== '' ||
-                this.color.getSpace() !== 'hex'
-            ) {
+            if (this.color.toOriginal()) {
                 return this.color.toString('hex');
             }
         },
         hex() {
-            if (
-                this.color.toOriginal() !== '' ||
-                this.color.getSpace() !== 'hex'
-            ) {
+            if (this.color.toOriginal()) {
                 return this.color.toString('hex').substring(0, 7);
             }
         }
@@ -47,7 +41,7 @@ export default {
             }
 
             let color = new Color(event.target.value);
-            let space = this.color.getSpace();
+            let space = this.color.toSpace();
 
             color.setAlpha(this.color.getAlpha());
 

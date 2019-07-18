@@ -30,7 +30,7 @@ export default {
     methods: {
         store(value) {
             let opacity = parseInt(value, 10);
-            let space = this.color.getSpace();
+            let space = this.color.toSpace();
 
             this.color.setAlpha(opacity);
 

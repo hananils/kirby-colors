@@ -28,17 +28,17 @@ export default {
                 colors = ['#fff', '#000'];
             }
 
-            return this.color.toMostReadable(this.color, colors);
+            return this.color.toMostReadable(colors);
         },
         rating() {
-            // let score = readability(this.color, this.readable);
-            // let rating = 'AALarge';
-            // if (score >= 7) {
-            //     rating = 'AAA';
-            // } else if (score >= 4.5) {
-            //     rating = 'AA / AAALarge';
-            // }
-            // return rating;
+            const readable = this.readable;
+
+            if (readable.length) {
+                const accessibility = this.readable[0].accessibility;
+                return accessibility[accessibility.length - 1];
+            }
+
+            return;
         },
         value() {
             if (!this.readable) {
