@@ -66,9 +66,9 @@ Kirby::plugin('hananils/colors', [
             $color = $field->toClass($field);
             return $color->toValues();
         },
-        'toReport' => function ($field) {
+        'toReadabilityReport' => function ($field) {
             $color = $field->toClass($field);
-            return $color->toReport();
+            return $color->toReadabilityReport();
         },
         'toMostReadable' => function ($field) {
             $color = $field->toClass($field);
