@@ -86,9 +86,9 @@ class Readability
     public function getLuminance($color)
     {
         $values = $color->toObject();
-        $red = $values['red'] / 255;
-        $green = $values['green'] / 255;
-        $blue = $values['blue'] / 255;
+        $red = $values['r'] / 255;
+        $green = $values['g'] / 255;
+        $blue = $values['b'] / 255;
 
         if ($red <= 0.03928) {
             $r = $red / 12.92;
@@ -131,7 +131,7 @@ class Readability
      * Output
      */
 
-    public function toObject()
+    public function toReport()
     {
         $report = [
             'color' => $this->color,

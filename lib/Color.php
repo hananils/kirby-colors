@@ -3,85 +3,344 @@
 namespace Hananils;
 
 use Hananils\Readability;
-use Hananils\Spaces\Hex;
-use Hananils\Spaces\Hsl;
-use Hananils\Spaces\Rgb;
 
 class Color
 {
-    private $space;
+    use Converter;
+
+    private $original = null;
+    private $space = null;
+    private $r = null;
+    private $g = null;
+    private $b = null;
+    private $h = null;
+    private $s = null;
+    private $l = null;
+    private $a = 100;
 
     public function __construct($color)
     {
         if (is_a($color, 'Hananils\Color')) {
-            $this->space = $color->toSpace();
+            $values = $color->toValues();
+            $color->setValues();
         } elseif ($this->isHex($color)) {
-            $this->space = new Hex($color);
+            $this->space = 'hex';
+            $this->parseHex($color);
         } elseif ($this->isRgb($color)) {
-            $this->space = new Rgb($color);
+            $this->space = 'rgb';
+            $this->parseRgb($color);
         } elseif ($this->isHsl($color)) {
-            $this->space = new Hsl($color);
+            $this->space = 'hsl';
+            $this->parseHsl($color);
         } else {
-            $this->space = new Hex('#fff');
+            $this->setDefault();
         }
     }
 
     /**
-     * Validators
+     * Checks
      */
 
     public function isHex($string)
     {
-        return Hex::inSpace($string) === true;
+        return strpos($string, '#') === 0;
     }
 
     public function isRgb($string)
     {
-        return Rgb::inSpace($string) === true;
+        return strpos($string, 'rgb') === 0;
     }
 
     public function isHsl($string)
     {
-        return Hsl::inSpace($string) === true;
+        return strpos($string, 'hsl') === 0;
     }
 
     public function hasAlpha()
     {
-        return $this->space->hasAlpha();
+        return $this->a !== 100;
+    }
+
+    /**
+     * Parsers
+     */
+
+    public function parseHex($string)
+    {
+        $string = trim($string, '#; ');
+
+        if (strlen($string) < 6) {
+            $values = str_split($string, 1);
+            foreach ($values as $key => $value) {
+                $values[$key] = str_repeat($value, 2);
+            }
+        } else {
+            $values = str_split($string, 2);
+        }
+
+        $this->setHex($values);
+    }
+
+    public function parseRgb($string)
+    {
+        preg_match("/\((.*)\)/", $string, $matches);
+        $values = preg_split("/[\s,\/]+/", $matches[1]);
+
+        $this->setRgb($values);
+    }
+
+    public function parseHsl($string)
+    {
+        preg_match("/\((.*)\)/", $string, $matches);
+        $values = preg_split("/[\s,\/]+/", $matches[1]);
+
+        $this->setHsl($values);
+    }
+
+    /**
+     * Setters
+     */
+
+    public function setDefault()
+    {
+        $this->setValues([
+            'space' => 'hex',
+            'r' => 255,
+            'g' => 255,
+            'b' => 255,
+            'h' => 0,
+            's' => 0,
+            'l' => 100,
+            'a' => 100
+        ]);
+    }
+
+    public function setValues($values)
+    {
+        $this->original = $values['original'];
+        $this->space = $values['space'];
+        $this->r = $values['r'];
+        $this->g = $values['g'];
+        $this->b = $values['b'];
+        $this->h = $values['h'];
+        $this->s = $values['s'];
+        $this->l = $values['l'];
+        $this->a = $values['a'];
+    }
+
+    /* Set by value */
+
+    public function setSpace($format)
+    {
+        $this->space = $format;
+    }
+
+    public function setRed($value)
+    {
+        $this->r = $this->convertValueToDecimal($value);
+    }
+
+    public function setGreen($value)
+    {
+        $this->g = $this->convertValueToDecimal($value);
+    }
+
+    public function setBlue($value)
+    {
+        $this->b = $this->convertValueToDecimal($value);
+    }
+
+    public function setHue($value)
+    {
+        $this->h = $this->convertValueToDecimal($value);
+    }
+
+    public function setSaturation($value)
+    {
+        $this->s = $this->convertValueToDecimal($value);
+    }
+
+    public function setLightness($value)
+    {
+        $this->l = $this->convertValueToDecimal($value);
+    }
+
+    public function setAlpha($value)
+    {
+        $this->a = $this->convertValueToDecimal($value);
+    }
+
+    /* Set by space */
+
+    public function setHex($values)
+    {
+        if (!$values) {
+            $this->setDefault();
+            return;
+        }
+
+        $this->setRed(hexdec($values[0]));
+        $this->setGreen(hexdec($values[1]));
+        $this->setBlue(hexdec($values[2]));
+
+        if (count($values) === 4) {
+            $this->setAlpha($this->rebaseHexForDecimal($values[3]));
+        }
+
+        $this->convertRgbToHsl();
+    }
+
+    public function setRgb($values)
+    {
+        if (!$values) {
+            $this->setDefault();
+            return;
+        }
+
+        $this->setRed($values[0]);
+        $this->setGreen($values[1]);
+        $this->setBlue($values[2]);
+
+        if (count($values) === 4) {
+            $this->setAlpha($values[3]);
+        }
+
+        $this->convertRgbToHsl();
+    }
+
+    public function setHsl($values)
+    {
+        if (!$values) {
+            $this->setDefault();
+            return;
+        }
+
+        $this->setHue($values[0]);
+        $this->setSaturation($values[1]);
+        $this->setLightness($values[2]);
+
+        if (count($values) === 4) {
+            $this->setAlpha($values[3]);
+        }
+
+        $this->convertHslToRgb();
+    }
+
+    /**
+     * Getters
+     */
+
+    public function getSpace()
+    {
+        return $this->space;
+    }
+
+    public function getAlpha()
+    {
+        return $this->a;
     }
 
     /**
      * Readability
      */
 
-    public function checkReadability($combinations = ['#fff', '#000'])
+    public function toReadabilityReport($combinations = ['#fff', '#000'])
     {
-        $readability = new Readability($this, $combinations);
-        return $readability->toObject();
+        $readability = new Readability($combinations);
+        return $readability->toReport();
     }
 
-    public function getMostReadable($combinations = ['#fff', '#000'])
+    public function toMostReadable($combinations = ['#fff', '#000'])
     {
-        $readability = new Readability($this, $combinations);
+        $readability = new Readability($combinations);
         return $readability->toMostReadable();
     }
 
     /**
-     * Output
+     * Results
      */
 
-    public function toSpace()
+    public function toOriginal()
     {
-        return $this->space;
+        return $this->original;
     }
 
-    public function toObject()
+    public function toValues()
     {
-        return $this->space->toObject();
+        return {
+            'original' => $this->original,
+            'space' => $this->space,
+            'r' => $this->r,
+            'g' => $this->g,
+            'b' => $this->b,
+            'h' => $this->h,
+            's' => $this->s,
+            'l' => $this->l,
+            'a' => $this->a;
+        };
     }
 
-    public function toColor($format = 'hex', $precision = 0)
+    public function toHex()
     {
-        return $this->space->toString($format, $precision);
+        return {
+            'r' => $this->convertDecimalToHex($this->r),
+            'g' => $this->convertDecimalToHex($this->g),
+            'b' => $this->convertDecimalToHex($this->b),
+            'a' => $this->convertDecimalToHex($this->rebaseDecimalForHex($this->a));
+        };
     }
+
+    public function toRgb()
+    {
+        return {
+            'r' => round($this->r),
+            'g' => round($this->g),
+            'b' => round($this->b),
+            'a' => $this->convertToFloat($this->a);
+        };
+    }
+
+    public function toHsl()
+    {
+        return {
+            'h' => round($this->h),
+            's' => round($this->s),
+            'l' => round($this->l),
+            'a' => $this->convertToFloat($this->a);
+        };
+    }
+
+    public function toString($format = null)
+    {
+        if (!$format) {
+            $format = $this->getSpace();
+        }
+
+        if (strpos($format, 'hsl') === 0) {
+            $hsl = $this->toHsl();
+
+            if ($this-> < 100) {
+                return "hsla({$h}, {$}%, {$l}%, {$a})";
+            } else {
+                return "hsla({$h}, {$}%, {$l}%})";
+            }
+        } elseif (strpos($format, 'rgb') === 0) {
+            $rgb = $this->toRgb();
+
+            if ($this-> < 100) {
+                return "rgba({$r}, {$g}, {$b}, {$a})";
+            } else {
+                return "rgb({$r}, {$g}, {$b})";
+            }
+        } else {
+            $hex = $this->toHex();
+
+            if ($this-> < 100) {
+                return "#{$r} {$g}{$b}{$a}";
+            } else {
+                return "#{$r}{$g}{$b}";
+            }
+        }
+    }
+
 }

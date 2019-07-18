@@ -49,7 +49,7 @@ class Color extends Converter {
     }
 
     hasAlpha() {
-        return this.alpha !== 100;
+        return this.a !== 100;
     }
 
     /**
