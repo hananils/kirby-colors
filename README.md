@@ -98,7 +98,3 @@ Please note that there is another color field for Kirby 3 developed by Tim Ötti
 ## License
 
 MIT, [see license](https://github.com/hananils/kirby-colors/blob/master/LICENSE)
-
-## Credits
-
-Thanks to [Brian Grinstead](https://briangrinstead.com/) and [Scott Cooper](https://github.com/scttcper) for providing the [TinyColor library](https://github.com/TypeCtrl/tinycolor).
