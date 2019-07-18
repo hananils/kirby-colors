@@ -54,9 +54,9 @@ Kirby::plugin('hananils/colors', [
             $value = getValue($field->value);
             return new Hananils\Color($value);
         },
-        'toColor' => function ($field) {
+        'toColor' => function ($field, $space = null) {
             $color = $field->toClass($field);
-            return $color->toString();
+            return $color->toString($space);
         },
         'toSpace' => function ($field) {
             $color = $field->toClass($field);
