@@ -70,31 +70,31 @@ colors:
 
 ## Field Methods
 
-### `$field->isHex()`
+#### `$field->isHex()`
 
 Verifies if the current color is stored as hexadecimal value, returns `true` or `false`.
 
-### `$field->isRgb()`
+#### `$field->isRgb()`
 
 Verifies if the current color is stored as RGB value, returns `true` or `false`.
 
-### `$field->isHsl()`
+#### `$field->isHsl()`
 
 Verifies if the current color is stored as HSL value, returns `true` or `false`.
 
-### `$field->toClass()`
+#### `$field->toClass()`
 
 Returns the current color object, `Hananils\Color`, see `lib\Color.php`.
 
-### `$field->toColor($space)`
+#### `$field->toColor($space)`
 
 Returns the current color as string. Accepts an optional `$space` attribute to set the output color space, either `hex`, `rgb` or `hsl`.
 
-### `$field->toSpace()`
+#### `$field->toSpace()`
 
 Returns the current color space, either `hex`, `rgb` or `hsl`.
 
-### `$field->toValues()`
+#### `$field->toValues()`
 
 Returns all color values, e. g.:
 
@@ -112,7 +112,7 @@ Returns all color values, e. g.:
 ]
 ```
 
-### `$field->toReadabilityReport()`
+#### `$field->toReadabilityReport()`
 
 Returns a readability report for the specified contrast colors:
 
@@ -187,7 +187,7 @@ Array
 )
 ```
 
-### `$field->toMostReadable()`
+#### `$field->toMostReadable()`
 
 Returns the most readable contrast color.
 
