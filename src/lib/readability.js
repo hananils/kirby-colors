@@ -44,20 +44,17 @@ class Readability {
     setRating(ratio) {
         let ratings = [];
 
-        if (ratio >= 4.5) {
-            ratings.push('aa');
-        }
-
         if (ratio >= 3) {
             ratings.push('aaLarge');
         }
 
-        if (ratio >= 7) {
-            ratings.push('aaa');
-        }
-
         if (ratio >= 4.5) {
             ratings.push('aaaLarge');
+            ratings.push('aa');
+        }
+
+        if (ratio >= 7) {
+            ratings.push('aaa');
         }
 
         if (ratings.length > this.highest) {

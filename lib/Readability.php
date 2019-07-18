@@ -54,20 +54,17 @@ class Readability
     {
         $ratings = [];
 
-        if ($ratio >= 4.5) {
-            $ratings[] = 'aa';
-        }
-
         if ($ratio >= 3) {
             $ratings[] = 'aaLarge';
         }
 
-        if ($ratio >= 7) {
-            $ratings[] = 'aaa';
-        }
-
         if ($ratio >= 4.5) {
             $ratings[] = 'aaaLarge';
+            $ratings[] = 'aa';
+        }
+
+        if ($ratio >= 7) {
+            $ratings[] = 'aaa';
         }
 
         if (count($ratings) > $this->highest) {
