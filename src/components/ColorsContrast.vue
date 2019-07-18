@@ -31,21 +31,24 @@ export default {
             return this.color.toMostReadable(colors);
         },
         rating() {
-            const readable = this.readable;
+            if (this.readable.length) {
+                const [readable] = this.readable;
 
-            if (readable.length) {
-                const accessibility = this.readable[0].accessibility;
-                return accessibility[accessibility.length - 1];
+                return readable.accessibility[
+                    readable.accessibility.length - 1
+                ];
             }
 
             return;
         },
         value() {
-            if (!this.readable) {
-                return;
+            if (this.readable.length) {
+                const [readable] = this.readable;
+
+                return readable.color.toString();
             }
 
-            return this.readable[0].color.toString();
+            return;
         }
     }
 };

@@ -79,7 +79,7 @@ Kirby::plugin('hananils/colors', [
                 return;
             }
 
-            return $readable[0]['color']->toString($space);
+            return array_shift($readable)['color']->toString($space);
         }
     ]
 ]);
