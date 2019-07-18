@@ -24,19 +24,16 @@ export default {
     },
     computed: {
         opacity() {
-            return Math.round(this.color.getAlpha() * 100);
+            return this.color.getAlpha();
         }
     },
     methods: {
         store(value) {
-            let opacity = parseInt(value, 10) / 100;
-            let space;
-
-            if (this.color.format && this.color.format.indexOf('hex') > -1) {
-                space = 'hex8';
-            }
+            let opacity = parseInt(value, 10);
+            let space = this.color.toSpace();
 
             this.color.setAlpha(opacity);
+
             this.$emit('change-opacity', this.color.toString(space));
         }
     }

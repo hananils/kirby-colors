@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { TinyColor } from '@ctrl/tinycolor';
+import Color from '../lib/color';
 
 export default {
     props: {
@@ -23,13 +23,13 @@ export default {
     },
     computed: {
         value() {
-            if (this.color.originalInput !== '') {
-                return '#' + this.color.toHex8();
+            if (this.color.toOriginal()) {
+                return this.color.toString('hex');
             }
         },
         hex() {
-            if (this.color.originalInput !== '') {
-                return '#' + this.color.toHex();
+            if (this.color.toOriginal()) {
+                return this.color.toString('hex').substring(0, 7);
             }
         }
     },
@@ -40,12 +40,11 @@ export default {
                 return;
             }
 
-            let color = new TinyColor(event.target.value);
-            let space = this.color.format;
+            let color = new Color(event.target.value);
+            let space = this.color.toSpace();
 
             color.setAlpha(this.color.getAlpha());
 
-            this.$emit('invalid', false);
             this.$emit('input', color.toString(space));
         }
     }

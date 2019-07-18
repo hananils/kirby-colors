@@ -11,12 +11,20 @@ class ComposerStaticInit59c454479cb6f941fcac64d41ed9dc50
         array (
             'Kirby\\' => 6,
         ),
+        'H' => 
+        array (
+            'Hananils\\' => 9,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Kirby\\' => 
         array (
             0 => __DIR__ . '/..' . '/getkirby/composer-installer/src',
+        ),
+        'Hananils\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib',
         ),
     );
 

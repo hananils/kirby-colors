@@ -9,6 +9,11 @@
             "email": "buero@hananils.de"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Hananils\\": "lib/"
+        }
+    },
     "require": {
         "getkirby/composer-installer": "^1.1"
     }

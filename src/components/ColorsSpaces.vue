@@ -9,17 +9,17 @@
         <k-dropdown-content ref="dropdown" align="right">
             <k-dropdown-item
                 @click="showHex"
-                :class="{ 'is-current': space.indexOf('hex') > -1 }"
+                :class="{ 'is-current': space === 'hex' }"
                 >HEX</k-dropdown-item
             >
             <k-dropdown-item
                 @click="showRgb"
-                :class="{ 'is-current': space.indexOf('rgb') > -1 }"
+                :class="{ 'is-current': space === 'rgb' }"
                 >RGB</k-dropdown-item
             >
             <k-dropdown-item
                 @click="showHsl"
-                :class="{ 'is-current': space.indexOf('hsl') > -1 }"
+                :class="{ 'is-current': space === 'hsl' }"
                 >HSL</k-dropdown-item
             >
         </k-dropdown-content>
@@ -33,13 +33,13 @@ export default {
     },
     methods: {
         showHex() {
-            this.$emit('change-space', 'toHex8');
+            this.$emit('change-space', 'hex');
         },
         showRgb() {
-            this.$emit('change-space', 'toRgb');
+            this.$emit('change-space', 'rgb');
         },
         showHsl() {
-            this.$emit('change-space', 'toHsl');
+            this.$emit('change-space', 'hsl');
         }
     }
 };

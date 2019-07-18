@@ -33,14 +33,13 @@
 </template>
 
 <script>
-import { TinyColor, mostReadable } from '@ctrl/tinycolor';
+import Color from '../lib/color';
 
 export default {
     inheritAttrs: false,
     props: {
         name: [String, Number],
         label: String,
-        default: String,
         value: Array,
         contrast: Object,
         readability: Boolean,
@@ -52,50 +51,25 @@ export default {
     },
     computed: {
         color() {
-            let value;
-
-            if (this.value.length) {
-                value = this.value[0];
-            } else {
-                value = this.default;
-            }
-
-            return new TinyColor(value);
+            return new Color(this.value);
         },
         space() {
-            return this.color.format ? this.color.format : 'hex';
+            return this.color.toSpace();
         }
     },
     methods: {
         onInput(value) {
             this.store(value);
         },
-        onChangeSpace(converter) {
-            this.store(this.color[converter]());
+        onChangeSpace(format) {
+            this.color.setSpace(format);
+            this.store(this.color.toString());
         },
         onChangeOpacity(value) {
             this.store(value);
         },
         store(value) {
-            let contrast = this.getContrast(value);
-
-            this.$emit('input', [value, contrast]);
-        },
-        getContrast(value) {
-            let contrast = this.readable(value);
-
-            if (contrast) {
-                return contrast.toString();
-            }
-        },
-        readable() {
-            let colors = this.contrast;
-
-            if (!colors || colors === true) {
-                colors = ['#fff', '#000'];
-            }
-
-            return mostReadable(this.color, colors);
+            this.$emit('input', value);
         }
     }
 };

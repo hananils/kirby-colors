@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Kirby\\' => array($vendorDir . '/getkirby/composer-installer/src'),
+    'Hananils\\' => array($baseDir . '/lib'),
 );

@@ -110,65 +110,67 @@
 </template>
 
 <script>
-import { TinyColor } from '@ctrl/tinycolor';
 import input from '../mixins/input';
 
 export default {
     mixins: [input],
     props: {
-        color: Object,
+        color: {
+            validator: function(value) {
+                value instanceof Color;
+            }
+        },
         space: String
     },
     computed: {
         hex() {
-            if (this.color.originalInput !== '') {
-                return this.color.toHex();
+            if (this.color.toOriginal()) {
+                return this.color.toString('hex').substr(1, 6);
             }
         },
         rgb() {
             return this.color.toRgb();
         },
         hsl() {
-            let hsl = this.color.toHsl();
-
-            hsl.h = Math.round(hsl.h);
-            hsl.s = Math.round(hsl.s * 100);
-            hsl.l = Math.round(hsl.l * 100);
-
-            return hsl;
+            return this.color.toHsl();
         }
     },
     methods: {
         store(value, input) {
-            let color = value;
+            const fields = this.$refs;
+            let values = {};
 
-            if (color.indexOf('#') === -1) {
-                color = '#' + color;
+            if (!value && value !== 0) {
+                this.$emit('input', '');
+                return;
             }
 
-            if (this.space === 'rgb') {
-                color = {
-                    r: this.$refs.r.value,
-                    g: this.$refs.g.value,
-                    b: this.$refs.b.value
-                };
-            } else if (this.space === 'hsl') {
-                color = {
-                    h: this.$refs.h.value,
-                    s: this.$refs.s.value,
-                    l: this.$refs.l.value
-                };
+            if (this.space !== 'hex') {
+                Object.keys(fields).forEach(function(key) {
+                    if (fields.hasOwnProperty(key) && fields[key].value) {
+                        values[key] = fields[key].value;
+                    }
+                });
+
+                if (input) {
+                    values[input.dataset.unit] = value;
+                }
             }
 
             // Set value from arrow interactions
-            if (input) {
-                color[input.dataset.unit] = value;
+            switch (this.space) {
+                case 'hex':
+                    this.color.parseHex(value);
+                    break;
+                case 'rgb':
+                    this.color.setRgb([values.r, values.g, values.b]);
+                    break;
+                case 'hsl':
+                    this.color.setHsl([values.h, values.s, values.l]);
+                    break;
             }
 
-            color = new TinyColor(color);
-            color.setAlpha(this.color.getAlpha());
-
-            this.$emit('input', color.toString());
+            this.$emit('input', this.color.toString());
         }
     }
 };

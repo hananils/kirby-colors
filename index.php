@@ -1,11 +1,26 @@
 <?php
 
+@include_once __DIR__ . '/vendor/autoload.php';
+
+function getValue($value = null)
+{
+    if (is_array($value)) {
+        return $value[0];
+    }
+
+    return $value;
+}
+
 Kirby::plugin('hananils/colors', [
     'fields' => [
         'colors' => [
             'props' => [
                 'value' => function ($value = null) {
-                    return Yaml::decode($value);
+                    if (is_array($value)) {
+                        return $value[0];
+                    }
+
+                    return $value;
                 },
                 'help' => function ($help = null) {
                     return $help;
@@ -18,41 +33,68 @@ Kirby::plugin('hananils/colors', [
                 }
             ],
             'save' => function ($value) {
-                return Yaml::encode($value);
+                return $value;
             }
         ]
     ],
     'fieldMethods' => [
         'isHex' => function ($field) {
-            $color = $field->toColor();
-            return strpos($color, '#') === 0;
+            $color = $field->toClass($field);
+            return $color->isHex($value);
         },
         'isRgb' => function ($field) {
-            return strpos($field->value, 'rgb') === 0;
+            $color = $field->toClass($field);
+            return $color->isRgb($value);
         },
         'isHsl' => function ($field) {
-            return strpos($field->value, 'hsl') === 0;
+            $color = $field->toClass($field);
+            return $color->isHsl($value);
         },
-        'toColors' => function ($field) {
-            return Yaml::decode($field->value);
+        'toClass' => function ($field) {
+            $value = getValue($field->value);
+            return new Hananils\Color($value);
         },
-        'toColor' => function ($field) {
-            $colors = $field->toColors();
+        'toColor' => function ($field, $space = null) {
+            $color = $field->toClass($field);
+            return $color->toString($space);
+        },
+        'toSpace' => function ($field) {
+            $color = $field->toClass($field);
+            return $color->toSpace();
+        },
+        'toValues' => function ($field) {
+            $color = $field->toClass($field);
+            return $color->toValues();
+        },
+        'toReadabilityReport' => function ($field) {
+            $color = $field->toClass($field);
+            $blueprint = $field->model()->blueprint()->fields();
+            $name = $field->key();
 
-            if (isset($colors[0])) {
-                return $colors[0];
+            if (isset($blueprint[$name]['contrast']) && is_array($blueprint[$name]['contrast'])) {
+                return $color->toReadabilityReport($blueprint[$name]['contrast']);
             }
 
-            return null;
+            return $color->toReadabilityReport();
         },
-        'toReadableColor' => function ($field) {
-            $colors = $field->toColors($field);
+        'toMostReadable' => function ($field) {
+            $color = $field->toClass($field);
+            $blueprint = $field->model()->blueprint()->fields();
+            $name = $field->key();
 
-            if (isset($colors[1])) {
-                return $colors[1];
+            if (isset($blueprint[$name]['contrast']) && is_array($blueprint[$name]['contrast'])) {
+                $readable = $color->toMostReadable($blueprint[$name]['contrast']);
+            } else {
+                $readable = $color->toMostReadable();
             }
 
-            return null;
+            $space = $color->toSpace();
+
+            if (count($readable) === 0) {
+                return;
+            }
+
+            return array_shift($readable)['color']->toString($space);
         }
     ]
 ]);
