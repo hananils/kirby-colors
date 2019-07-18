@@ -2,18 +2,10 @@
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
-use Hananils\Colors;
-
 function getValue($value = null)
 {
-    if (!$value) {
-        return;
-    }
-
-    $value = Yaml::decode($value);
-
     if (is_array($value)) {
-        $value = $value[0];
+        return $value[0];
     }
 
     return $value;
@@ -24,6 +16,10 @@ Kirby::plugin('hananils/colors', [
         'colors' => [
             'props' => [
                 'value' => function ($value = null) {
+                    if (is_array($value)) {
+                        return $value[0];
+                    }
+
                     return $value;
                 },
                 'help' => function ($help = null) {
@@ -43,46 +39,47 @@ Kirby::plugin('hananils/colors', [
     ],
     'fieldMethods' => [
         'isHex' => function ($field) {
-            $value = getValue($field->value);
-            return Colors::isHex($value);
+            $color = $field->toClass($field);
+            return $color->isHex($value);
         },
         'isRgb' => function ($field) {
-            $value = getValue($field->value);
-            return Colors::isRgb($value);
+            $color = $field->toClass($field);
+            return $color->isRgb($value);
         },
         'isHsl' => function ($field) {
-            $value = getValue($field->value);
-            return Colors::isHsl($value);
+            $color = $field->toClass($field);
+            return $color->isHsl($value);
         },
-        'toSpace' => function ($field) {
+        'toClass' => function ($field) {
             $value = getValue($field->value);
-            $color = new Colors($value);
-
-            return $color->toSpace();
-        },
-        'toObject' => function ($field) {
-            $value = getValue($field->value);
-            $color = new Colors($value);
-
-            return $color->toObject();
+            return new Hananils\Color($value);
         },
         'toColor' => function ($field) {
-            $value = getValue($field->value);
-            $color = new Colors($value);
-
-            return $color->toColor();
+            $color = $field->toClass($field);
+            return $color->toString();
+        },
+        'toSpace' => function ($field) {
+            $color = $field->toClass($field);
+            return $color->toSpace();
+        },
+        'toValues' => function ($field) {
+            $color = $field->toClass($field);
+            return $color->toValues();
+        },
+        'toReport' => function ($field) {
+            $color = $field->toClass($field);
+            return $color->toReport();
         },
         'toMostReadable' => function ($field) {
-            $value = getValue($field->value);
-            $color = new Colors($value);
-            $readable = $color->getMostReadable();
-            $format = 'hex';
+            $color = $field->toClass($field);
+            $readable = $color->toMostReadable();
+            $space = $color->toSpace();
 
-            if ($color->hasAlpha()) {
-                $format = 'hex8';
+            if (count($readable) === 0) {
+                return;
             }
 
-            return $readable[1]['color']->toColor($format);
+            return $readable[0]['color']->toString($space);
         }
     ]
 ]);
