@@ -140,33 +140,33 @@ export default {
             const fields = this.$refs;
             let values = {};
 
-            if (!value) {
+            if (!value && value !== 0) {
                 this.$emit('input', '');
                 return;
             }
 
-            // Set value from arrow interactions
-            if (input) {
-                values[input.dataset.unit] = value;
+            if (this.space !== 'hex') {
+                Object.keys(fields).forEach(function(key) {
+                    if (key in fields) {
+                        values[key] = fields[key].value;
+                    }
+                });
+
+                if (input) {
+                    values[input.dataset.unit] = value;
+                }
             }
 
+            // Set value from arrow interactions
             switch (this.space) {
                 case 'hex':
                     this.color.parseHex(value);
                     break;
                 case 'rgb':
-                    this.color.setRgb([
-                        fields.r.value,
-                        fields.g.value,
-                        fields.b.value
-                    ]);
+                    this.color.setRgb([values.r, values.g, values.b]);
                     break;
                 case 'hsl':
-                    this.color.setHsl([
-                        fields.h.value,
-                        fields.s.value,
-                        fields.l.value
-                    ]);
+                    this.color.setHsl([values.h, values.s, values.l]);
                     break;
             }
 
