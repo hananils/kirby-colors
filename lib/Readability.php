@@ -112,22 +112,6 @@ class Readability
     }
 
     /**
-     * Utilities
-     */
-
-    public function sortCombinations($a, $b)
-    {
-        $a = count($a['accessibility']);
-        $b = count($b['accessibility']);
-
-        if ($a === $b) {
-            return 0;
-        }
-
-        return ($a < $b) ? -1 : 1;
-    }
-
-    /**
      * Output
      */
 
@@ -143,8 +127,6 @@ class Readability
 
     public function toMostReadable()
     {
-        uasort($this->combinations, array($this, 'sortCombinations'));
-
         $best = array_filter($this->combinations, function ($combination) {
             return count($combination['accessibility']) === $this->highest;
         });

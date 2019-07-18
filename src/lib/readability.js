@@ -106,21 +106,6 @@ class Readability {
     }
 
     /**
-     * Utilities
-     */
-
-    sortCombinations(a, b) {
-        a = a['accessibility'].length;
-        b = b['accessibility'].length;
-
-        if (a === b) {
-            return 0;
-        }
-
-        return a < b ? -1 : 1;
-    }
-
-    /**
      * Output
      */
 
@@ -134,8 +119,6 @@ class Readability {
     }
 
     toMostReadable() {
-        // let combinations = this.combinations.sort(this.sortCombinations);
-
         let best = this.combinations.filter(function(combination) {
             return combination['accessibility'].length === this.highest;
         }, this);
