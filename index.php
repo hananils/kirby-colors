@@ -68,11 +68,26 @@ Kirby::plugin('hananils/colors', [
         },
         'toReadabilityReport' => function ($field) {
             $color = $field->toClass($field);
+            $blueprint = $field->model()->blueprint()->fields();
+            $name = $field->key();
+
+            if (isset($blueprint[$name]['contrast']) && is_array($blueprint[$name]['contrast'])) {
+                return $color->toReadabilityReport($blueprint[$name]['contrast']);
+            }
+
             return $color->toReadabilityReport();
         },
         'toMostReadable' => function ($field) {
             $color = $field->toClass($field);
-            $readable = $color->toMostReadable();
+            $blueprint = $field->model()->blueprint()->fields();
+            $name = $field->key();
+
+            if (isset($blueprint[$name]['contrast']) && is_array($blueprint[$name]['contrast'])) {
+                $readable = $color->toMostReadable($blueprint[$name]['contrast']);
+            } else {
+                $readable = $color->toMostReadable();
+            }
+
             $space = $color->toSpace();
 
             if (count($readable) === 0) {

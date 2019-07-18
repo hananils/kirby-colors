@@ -114,7 +114,7 @@ Returns all color values, e. g.:
 
 #### `$field->toReadabilityReport()`
 
-Returns a readability report for the specified contrast colors:
+Returns a readability report for the contrast colors defined in the blueprint, defaults to black and white:
 
 ```php
 Array
@@ -189,7 +189,7 @@ Array
 
 #### `$field->toMostReadable()`
 
-Returns the most readable contrast color.
+Returns the most readable color for the contrast colors defined in the blueprint, defaults to black and white.
 
 ## Color calculation
 
