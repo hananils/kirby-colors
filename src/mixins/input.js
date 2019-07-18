@@ -19,6 +19,11 @@ export default {
             }
 
             value = Math.min(value + step, max);
+
+            if (value < 0) {
+                value = 0;
+            }
+
             this.store(value, input);
         },
         onDown(event) {
@@ -37,6 +42,11 @@ export default {
             }
 
             value = Math.max(min, value - step);
+
+            if (value < 0) {
+                value = 0;
+            }
+
             this.store(value, input);
         }
     }
