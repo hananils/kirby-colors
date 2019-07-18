@@ -70,15 +70,126 @@ colors:
 
 ## Field Methods
 
--   `$field->isHex()`: wheather the color is stored as hexadecimal value, return `true` or `false`.
--   `$field->isRgb()`: wheather the color is stored as RGB value, return `true` or `false`.
--   `$field->isHsl()`: wheather the color is stored as HSL value, return `true` or `false`.
--   `$field->toClass()`: returns the current color class.
--   `$field->toColor($space)`: returns the current color. The optional `$space` attribute sets the output color space, accepts `hex`, `rgb` or `hsl`.
--   `$field->toSpace()`: returns the current color space, either `hex`, `rgb` or `hsl`.
--   `$field->toValues()`: returns all color values.
--   `$field->toReadabilityReport()`: returns a readability report.
--   `$field->toMostReadable()`: returns the most readable contrast color.
+### `$field->isHex()`
+
+Verifies if the current color is stored as hexadecimal value, returns `true` or `false`.
+
+### `$field->isRgb()`
+
+Verifies if the current color is stored as RGB value, returns `true` or `false`.
+
+### `$field->isHsl()`
+
+Verifies if the current color is stored as HSL value, returns `true` or `false`.
+
+### `$field->toClass()`
+
+Returns the current color object, `Hananils\Color`, see `lib\Color.php`.
+
+### `$field->toColor($space)`
+
+Returns the current color as string. Accepts an optional `$space` attribute to set the output color space, either `hex`, `rgb` or `hsl`.
+
+### `$field->toSpace()`
+
+Returns the current color space, either `hex`, `rgb` or `hsl`.
+
+### `$field->toValues()`
+
+Returns all color values, e. g.:
+
+```php
+[
+    'original' => '#ffffff',
+    'space' => 'hex',
+    'r' => 255,
+    'g' => 255,
+    'b' => 255,
+    'h' => 0,
+    's' => 0,
+    'l' => 100,
+    'a' => 100
+]
+```
+
+### `$field->toReadabilityReport()`
+
+Returns a readability report for the specified contrast colors:
+
+```php
+Array
+(
+    [color] => Hananils\Color Object
+        (
+            [original:Hananils\Color:private] => #00b7ff
+            [space:Hananils\Color:private] => hex
+            [r:Hananils\Color:private] => 0
+            [g:Hananils\Color:private] => 183
+            [b:Hananils\Color:private] => 255
+            [h:Hananils\Color:private] => 197
+            [s:Hananils\Color:private] => 100
+            [l:Hananils\Color:private] => 50
+            [a:Hananils\Color:private] => 100
+        )
+
+    [combinations] => Array
+        (
+            [0] => Array
+                (
+                    [color] => Hananils\Color Object
+                        (
+                            [original:Hananils\Color:private] => #fff
+                            [space:Hananils\Color:private] => hex
+                            [r:Hananils\Color:private] => 255
+                            [g:Hananils\Color:private] => 255
+                            [b:Hananils\Color:private] => 255
+                            [h:Hananils\Color:private] => 0
+                            [s:Hananils\Color:private] => 0
+                            [l:Hananils\Color:private] => 100
+                            [a:Hananils\Color:private] => 100
+                        )
+
+                    [contrast] => 2.2783010917435
+                    [accessibility] => Array
+                        (
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [color] => Hananils\Color Object
+                        (
+                            [original:Hananils\Color:private] => #000
+                            [space:Hananils\Color:private] => hex
+                            [r:Hananils\Color:private] => 0
+                            [g:Hananils\Color:private] => 0
+                            [b:Hananils\Color:private] => 0
+                            [h:Hananils\Color:private] => 0
+                            [s:Hananils\Color:private] => 0
+                            [l:Hananils\Color:private] => 0
+                            [a:Hananils\Color:private] => 100
+                        )
+
+                    [contrast] => 9.2173945209011
+                    [accessibility] => Array
+                        (
+                            [0] => aaLarge
+                            [1] => aaaLarge
+                            [2] => aa
+                            [3] => aaa
+                        )
+
+                )
+
+        )
+
+)
+```
+
+### `$field->toMostReadable()`
+
+Returns the most readable contrast color.
 
 ## Tips and tricks
 
