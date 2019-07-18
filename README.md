@@ -73,9 +73,12 @@ colors:
 -   `$field->isHex()`: wheather the color is stored as hexadecimal value, return `true` or `false`.
 -   `$field->isRgb()`: wheather the color is stored as RGB value, return `true` or `false`.
 -   `$field->isHsl()`: wheather the color is stored as HSL value, return `true` or `false`.
--   `$field->toColors()`: returns the chosen color and the readable color.
--   `$field->toColor()`: returns the chosen color.
--   `$field->toReadableColor()`: returns the readable color.
+-   `$field->toClass()`: returns the current color class.
+-   `$field->toColor($space)`: returns the current color. The optional `$space` attribute sets the output color space, accepts `hex`, `rgb` or `hsl`.
+-   `$field->toSpace()`: returns the current color space, either `hex`, `rgb` or `hsl`.
+-   `$field->toValues()`: returns all color values.
+-   `$field->toReadabilityReport()`: returns a readability report.
+-   `$field->toMostReadable()`: returns the most readable contrast color.
 
 ## Tips and tricks
 
