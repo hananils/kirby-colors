@@ -191,6 +191,10 @@ Array
 
 Returns the most readable contrast color.
 
+## Color calculation
+
+This plugin bundles two classes, one for JavaScript and one for PHP, with the identical API to perform color calculations. See `lib/Color.php` and `src/lib/color.js`.
+
 ## Tips and tricks
 
 1. Click on the left color preview to open the color picker.
