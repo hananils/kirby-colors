@@ -338,7 +338,7 @@ class Color
             if ($this->a < 100) {
                 return "hsla({$hsl['h']}, {$hsl['s']}%, {$hsl['l']}%, {$hsl['a']})";
             } else {
-                return "hsla({$hsl['h']}, {$hsl['s']}%, {$hsl['l']}%})";
+                return "hsla({$hsl['h']}, {$hsl['s']}%, {$hsl['l']}%)";
             }
         } elseif (strpos($format, 'rgb') === 0) {
             $rgb = $this->toRgb();
