@@ -147,7 +147,7 @@ export default {
 
             if (this.space !== 'hex') {
                 Object.keys(fields).forEach(function(key) {
-                    if (key in fields) {
+                    if (fields.hasOwnProperty(key) && fields[key].value) {
                         values[key] = fields[key].value;
                     }
                 });
