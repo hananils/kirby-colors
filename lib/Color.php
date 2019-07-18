@@ -318,8 +318,8 @@ class Color
 
     public function toHsl()
     {
-        return
-            ['h' => round($this->h),
+        return [
+            'h' => round($this->h),
             's' => round($this->s),
             'l' => round($this->l),
             'a' => $this->convertToFloat($this->a)
