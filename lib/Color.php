@@ -281,18 +281,18 @@ class Color
         return $this->space;
     }
 
-    public function toValues()
+    public function toValues($precision = 0)
     {
         return [
             'original' => $this->original,
             'space' => $this->space,
-            'r' => $this->r,
-            'g' => $this->g,
-            'b' => $this->b,
-            'h' => $this->h,
-            's' => $this->s,
-            'l' => $this->l,
-            'a' => $this->a
+            'r' => round($this->r, $precision),
+            'g' => round($this->g, $precision),
+            'b' => round($this->b, $precision),
+            'h' => round($this->h, $precision),
+            's' => round($this->s, $precision),
+            'l' => round($this->l, $precision),
+            'a' => round($this->a, $precision)
         ];
     }
 
@@ -306,23 +306,22 @@ class Color
         ];
     }
 
-    public function toRgb()
+    public function toRgb($precision = 0)
     {
         return [
-            'r' => round($this->r),
-            'g' => round($this->g),
-            'b' => round($this->b),
-            'a' => $this->convertToFloat($this->a)
-        ];
+            'r' => round($this->r, $precision),
+            'g' => round($this->g, $precision),
+            'b' => round($this->b, $precision),
+            'a' => $this->convertToFloat($this->a, $precision)];
     }
 
-    public function toHsl()
+    public function toHsl($precision = 0)
     {
         return [
-            'h' => round($this->h),
-            's' => round($this->s),
-            'l' => round($this->l),
-            'a' => $this->convertToFloat($this->a)
+            'h' => round($this->h, $precision),
+            's' => round($this->s, $precision),
+            'l' => round($this->l, $precision),
+            'a' => $this->convertToFloat($this->a, $precision)
         ];
     }
 

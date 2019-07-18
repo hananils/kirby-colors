@@ -153,6 +153,14 @@ class Converter {
         const decimal = this.convertHexToDecimal(hex);
         return Math.round((decimal / 255) * 100);
     }
+
+    round(number, precision = 0) {
+        if (precision > 0) {
+            return number.toPrecision(precision);
+        }
+
+        return Math.round(number);
+    }
 }
 
 export default Converter;

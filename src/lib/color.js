@@ -252,17 +252,17 @@ class Color extends Converter {
         return this.space;
     }
 
-    toValues() {
+    toValues(precision = 0) {
         return {
             original: this.original,
             space: this.space,
-            r: this.r,
-            g: this.g,
-            b: this.b,
-            h: this.h,
-            s: this.s,
-            l: this.l,
-            a: this.a
+            r: this.round(this.r),
+            g: this.round(this.g),
+            b: this.round(this.b),
+            h: this.round(this.h),
+            s: this.round(this.s),
+            l: this.round(this.l),
+            a: this.round(this.a)
         };
     }
 
@@ -275,20 +275,20 @@ class Color extends Converter {
         };
     }
 
-    toRgb() {
+    toRgb(precision = 0) {
         return {
-            r: Math.round(this.r),
-            g: Math.round(this.g),
-            b: Math.round(this.b),
+            r: this.round(this.r),
+            g: this.round(this.g),
+            b: this.round(this.b),
             a: this.convertToFloat(this.a)
         };
     }
 
-    toHsl() {
+    toHsl(precision = 0) {
         return {
-            h: Math.round(this.h),
-            s: Math.round(this.s),
-            l: Math.round(this.l),
+            h: this.round(this.h),
+            s: this.round(this.s),
+            l: this.round(this.l),
             a: this.convertToFloat(this.a)
         };
     }
