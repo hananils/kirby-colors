@@ -5,7 +5,7 @@ class Color extends Converter {
     constructor(color) {
         super();
 
-        this.original = color;
+        this.original = null;
         this.space = null;
         this.r = null;
         this.g = null;
@@ -19,12 +19,15 @@ class Color extends Converter {
             let values = color.toValues();
             this.setValues(values);
         } else if (this.isHex(color)) {
+            this.original = color;
             this.space = 'hex';
             this.parseHex(color);
         } else if (this.isRgb(color)) {
+            this.original = color;
             this.space = 'rgb';
             this.parseRgb(color);
         } else if (this.isHsl(color)) {
+            this.original = color;
             this.space = 'hsl';
             this.parseHsl(color);
         } else {

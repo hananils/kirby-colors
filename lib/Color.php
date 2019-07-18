@@ -22,14 +22,17 @@ class Color
     {
         if (is_a($color, 'Hananils\Color')) {
             $values = $color->toValues();
-            $color->setValues($values);
+            $this->setValues($values);
         } elseif ($this->isHex($color)) {
+            $this->original = $color;
             $this->space = 'hex';
             $this->parseHex($color);
         } elseif ($this->isRgb($color)) {
+            $this->original = $color;
             $this->space = 'rgb';
             $this->parseRgb($color);
         } elseif ($this->isHsl($color)) {
+            $this->original = $color;
             $this->space = 'hsl';
             $this->parseHsl($color);
         } else {
