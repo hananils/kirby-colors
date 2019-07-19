@@ -9,6 +9,9 @@
             "email": "buero@hananils.de"
         }
     ],
+    "support": {
+        "issues": "https://github.com/hananils/kirby-colors/issues/"
+    },
     "autoload": {
         "psr-4": {
             "Hananils\\": "lib/"
