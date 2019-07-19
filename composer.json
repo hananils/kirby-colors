@@ -1,5 +1,5 @@
 {
-    "name": "hananils/colors",
+    "name": "hananils/kirby-colors",
     "description": "A color field for Kirby 3",
     "type": "kirby-plugin",
     "license": "MIT",
