@@ -11,7 +11,7 @@ function getValue($value = null)
     return $value;
 }
 
-Kirby::plugin('hananils/colors', [
+Kirby::plugin('hananils/kirby-colors', [
     'fields' => [
         'colors' => [
             'props' => [
