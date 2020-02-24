@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Color from '../lib/color';
+import Color from "../lib/color";
 
 export default {
     inheritAttrs: false,
@@ -69,7 +69,7 @@ export default {
             this.store(value);
         },
         store(value) {
-            this.$emit('input', value);
+            this.$emit("input", value);
         }
     }
 };
@@ -102,5 +102,11 @@ export default {
 .k-colors-field .k-input-element {
     display: grid;
     grid-template-columns: 2.25rem auto 3.5rem 2.25rem;
+}
+
+.k-colors-field .k-field-footer {
+    grid-row-start: 3;
+    grid-column-end: -1;
+    grid-column-start: 1;
 }
 </style>
