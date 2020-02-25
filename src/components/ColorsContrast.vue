@@ -25,7 +25,7 @@ export default {
             let colors = this.contrast;
 
             if (colors === true) {
-                colors = ["#fff", "#000"];
+                colors = ['#fff', '#000'];
             }
 
             return this.color.toMostReadable(colors);
@@ -61,7 +61,7 @@ export default {
 }
 
 .k-colors-contrast::before {
-    content: "";
+    content: '';
     position: absolute;
     left: -24px;
     width: 16px;

@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Color from "../lib/color";
+import Color from '../lib/color';
 
 export default {
     inheritAttrs: false,
@@ -69,7 +69,7 @@ export default {
             this.store(value);
         },
         store(value) {
-            this.$emit("input", value);
+            this.$emit('input', value);
         }
     }
 };
