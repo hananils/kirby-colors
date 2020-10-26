@@ -77,7 +77,7 @@ class Color extends Converter {
 
         if (string.length < 6) {
             values = string.match(/.{1}/g);
-            values.forEach(function(value, key) {
+            values.forEach(function (value, key) {
                 values[key] = value.repeat(2);
             });
         } else {

@@ -18,8 +18,10 @@ class Readability
     private $combinations = [];
     private $highest = 0;
 
-    public function __construct($color = '#fff', $combinations = ['#fff', '#000'])
-    {
+    public function __construct(
+        $color = '#fff',
+        $combinations = ['#fff', '#000']
+    ) {
         $this->color = new Color($color);
 
         foreach ($combinations as $combination) {
@@ -30,7 +32,7 @@ class Readability
             $this->combinations[] = [
                 'color' => $color,
                 'contrast' => $ratio,
-                'accessibility' => $rating
+                'accessibility' => $rating,
             ];
         }
     }
@@ -105,7 +107,7 @@ class Readability
             $b = pow(($blue + 0.055) / 1.055, 2.4);
         }
 
-        return (0.2126 * $r) + (0.7152 * $g) + (0.0722 * $b);
+        return 0.2126 * $r + 0.7152 * $g + 0.0722 * $b;
     }
 
     /**
@@ -116,7 +118,7 @@ class Readability
     {
         $report = [
             'color' => $this->color,
-            'combinations' => $this->combinations
+            'combinations' => $this->combinations,
         ];
 
         return $report;
@@ -130,4 +132,4 @@ class Readability
 
         return $best;
     }
-};
+}

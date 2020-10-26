@@ -26,7 +26,10 @@ trait Converter
         $blue = $lightness;
 
         if ($saturation !== 0) {
-            $m2 = $lightness < 0.5 ? $lightness * (1 + $saturation) : $lightness + $saturation - $lightness * $saturation;
+            $m2 =
+                $lightness < 0.5
+                    ? $lightness * (1 + $saturation)
+                    : $lightness + $saturation - $lightness * $saturation;
             $m1 = 2 * $lightness - $m2;
 
             $red = $this->convertHueToRgb($m1, $m2, $hue + 1 / 3);
@@ -80,7 +83,7 @@ trait Converter
 
         $hue = 0;
         $saturation = 0;
-        $lightness = ($add / 2);
+        $lightness = $add / 2;
 
         if ($min != $max) {
             if ($lightness < 0.5) {
@@ -153,12 +156,12 @@ trait Converter
 
     public function rebaseDecimalForHex($number)
     {
-        return round($number / 100 * 255);
+        return round(($number / 100) * 255);
     }
 
     public function rebaseHexForDecimal($hex)
     {
         $decimal = $this->convertHexToDecimal($hex);
-        return round($decimal / 255 * 100);
+        return round(($decimal / 255) * 100);
     }
 }

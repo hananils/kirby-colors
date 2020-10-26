@@ -98,16 +98,16 @@ class Color
 
     public function parseRgb($string)
     {
-        preg_match("/\((.*)\)/", $string, $matches);
-        $values = preg_split("/[\s,\/]+/", $matches[1]);
+        preg_match('/\((.*)\)/', $string, $matches);
+        $values = preg_split('/[\s,\/]+/', $matches[1]);
 
         $this->setRgb($values);
     }
 
     public function parseHsl($string)
     {
-        preg_match("/\((.*)\)/", $string, $matches);
-        $values = preg_split("/[\s,\/]+/", $matches[1]);
+        preg_match('/\((.*)\)/', $string, $matches);
+        $values = preg_split('/[\s,\/]+/', $matches[1]);
 
         $this->setHsl($values);
     }
@@ -127,7 +127,7 @@ class Color
             'h' => 0,
             's' => 0,
             'l' => 100,
-            'a' => 100
+            'a' => 100,
         ]);
     }
 
@@ -292,7 +292,7 @@ class Color
             'h' => round($this->h, $precision),
             's' => round($this->s, $precision),
             'l' => round($this->l, $precision),
-            'a' => round($this->a, $precision)
+            'a' => round($this->a, $precision),
         ];
     }
 
@@ -302,7 +302,9 @@ class Color
             'r' => $this->convertDecimalToHex($this->r),
             'g' => $this->convertDecimalToHex($this->g),
             'b' => $this->convertDecimalToHex($this->b),
-            'a' => $this->convertDecimalToHex($this->rebaseDecimalForHex($this->a))
+            'a' => $this->convertDecimalToHex(
+                $this->rebaseDecimalForHex($this->a)
+            ),
         ];
     }
 
@@ -312,7 +314,8 @@ class Color
             'r' => round($this->r, $precision),
             'g' => round($this->g, $precision),
             'b' => round($this->b, $precision),
-            'a' => $this->convertToFloat($this->a, $precision)];
+            'a' => $this->convertToFloat($this->a, $precision),
+        ];
     }
 
     public function toHsl($precision = 0)
@@ -321,7 +324,7 @@ class Color
             'h' => round($this->h, $precision),
             's' => round($this->s, $precision),
             'l' => round($this->l, $precision),
-            'a' => $this->convertToFloat($this->a, $precision)
+            'a' => $this->convertToFloat($this->a, $precision),
         ];
     }
 
@@ -357,5 +360,4 @@ class Color
             }
         }
     }
-
 }

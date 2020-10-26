@@ -14,7 +14,7 @@ class Readability {
         this.combinations = [];
         this.highest = 0;
 
-        combinations.forEach(function(combination) {
+        combinations.forEach(function (combination) {
             let color = new Color(combination);
             let ratio = this.setContrastRatio(color);
             let rating = this.setRating(ratio);
@@ -116,7 +116,7 @@ class Readability {
     }
 
     toMostReadable() {
-        let best = this.combinations.filter(function(combination) {
+        let best = this.combinations.filter(function (combination) {
             return combination['accessibility'].length === this.highest;
         }, this);
 

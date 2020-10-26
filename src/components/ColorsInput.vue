@@ -116,7 +116,7 @@ export default {
     mixins: [input],
     props: {
         color: {
-            validator: function(value) {
+            validator: function (value) {
                 value instanceof Color;
             }
         },
