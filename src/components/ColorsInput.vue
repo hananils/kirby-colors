@@ -146,8 +146,8 @@ export default {
             }
 
             if (this.space !== 'hex') {
-                Object.keys(fields).forEach(function(key) {
-                    if (fields.hasOwnProperty(key) && fields[key].value) {
+                Object.keys(fields).forEach(function (key) {
+                    if (fields[key]) {
                         values[key] = fields[key].value;
                     }
                 });
