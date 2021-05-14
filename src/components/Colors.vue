@@ -51,7 +51,13 @@ export default {
     },
     computed: {
         color() {
-            return new Color(this.value);
+            let color = new Color(this.value);
+
+            if (this.alpha === false) {
+                color.setAlpha(100);
+            }
+
+            return color;
         },
         space() {
             return this.color.toSpace();
