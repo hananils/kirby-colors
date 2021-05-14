@@ -138,7 +138,7 @@ trait Converter
         $hex = dechex(round($number));
 
         if ($pad) {
-            $hex = str_pad($hex, 2, '0');
+            $hex = str_pad($hex, 2, '0', STR_PAD_LEFT);
         }
 
         return $hex;
