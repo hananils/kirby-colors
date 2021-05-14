@@ -13,9 +13,6 @@
     "directories": {
         "src": "src"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
     "dependencies": {
         "vue": "^2.6.12",
         "vue-hot-reload-api": "^2.3.4"
