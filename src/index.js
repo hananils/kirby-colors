@@ -5,7 +5,7 @@ import ColorsOpacity from './components/ColorsOpacity.vue';
 import ColorsPicker from './components/ColorsPicker.vue';
 import ColorsSpaces from './components/ColorsSpaces.vue';
 
-panel.plugin('hananils/colors', {
+window.panel.plugin('hananils/colors', {
     fields: {
         colors: Colors
     },
