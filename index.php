@@ -51,7 +51,7 @@ Kirby::plugin('hananils/kirby-colors', [
             return $color->isHsl($value);
         },
         'toClass' => function ($field) {
-            $value = getValue($field->value);
+            $value = is_array($field->value) ? $field->value[0] : $field->value;
             return new Hananils\Color($value);
         },
         'toColor' => function ($field, $space = null) {
