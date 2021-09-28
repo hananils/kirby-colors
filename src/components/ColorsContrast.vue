@@ -34,7 +34,7 @@ export default {
 
         rating() {
             if (!this.readable.length) {
-                return '';
+                return null;
             }
 
             const [readable] = this.readable;
@@ -43,7 +43,7 @@ export default {
 
         value() {
             if (!this.readable.length) {
-                return '';
+                return null;
             }
 
             const [readable] = this.readable;
