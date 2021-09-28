@@ -14,19 +14,19 @@
             v-bind="$props"
             theme="field"
             type="colors"
-            @input="onInput"
+            @input="store"
         >
-            <k-colors-picker :color="color" @input="onInput" />
-            <k-colors-input :color="color" :space="space" @input="onInput" />
-            <k-colors-opacity
+            <colors-picker :color="color" @input="store" />
+            <colors-input :color="color" :space="space" @input="store" />
+            <colors-opacity
                 v-if="alpha !== false"
                 :color="color"
-                @change-opacity="onChangeOpacity"
+                @change-opacity="store"
             />
-            <k-colors-spaces :space="space" @change-space="onChangeSpace" />
+            <colors-spaces :space="space" @change-space="onChangeSpace" />
         </k-input>
 
-        <k-colors-contrast
+        <colors-contrast
             v-if="contrast !== false"
             :color="color"
             :contrast="contrast"
@@ -35,9 +35,22 @@
 </template>
 
 <script>
+import ColorsContrast from './ColorsContrast.vue';
+import ColorsInput from './ColorsInput.vue';
+import ColorsOpacity from './ColorsOpacity.vue';
+import ColorsPicker from './ColorsPicker.vue';
+import ColorsSpaces from './ColorsSpaces.vue';
 import Color from '../lib/color';
 
 export default {
+    components: {
+        ColorsContrast,
+        ColorsInput,
+        ColorsOpacity,
+        ColorsPicker,
+        ColorsSpaces
+    },
+
     inheritAttrs: false,
 
     props: {
@@ -70,17 +83,9 @@ export default {
     },
 
     methods: {
-        onInput(value) {
-            this.store(value);
-        },
-
         onChangeSpace(format) {
             this.color.setSpace(format);
             this.store(this.color.toString());
-        },
-
-        onChangeOpacity(value) {
-            this.store(value);
         },
 
         store(value) {
