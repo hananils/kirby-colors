@@ -152,11 +152,11 @@ export default {
             }
 
             if (this.space !== 'hex') {
-                Object.keys(fields).forEach(function (key) {
+                for (const key of Object.keys(fields)) {
                     if (fields[key]) {
                         values[key] = fields[key].value;
                     }
-                });
+                }
 
                 if (input) {
                     values[input.dataset.unit] = value;

@@ -14,7 +14,7 @@ class Readability {
         this.combinations = [];
         this.highest = 0;
 
-        combinations.forEach(function (combination) {
+        for (const combination of combinations) {
             const color = new Color(combination);
             const contrast = this.setContrastRatio(color);
             const accessibility = this.setRating(accessibility);
@@ -24,7 +24,7 @@ class Readability {
                 contrast,
                 accessibility
             });
-        }, this);
+        }
     }
 
     setContrastRatio(combination) {
@@ -107,20 +107,17 @@ class Readability {
      */
 
     toReport() {
-        const report = {
+        return {
             color: this.color,
             combinations: this.combinations
         };
-
-        return report;
     }
 
     toMostReadable() {
-        const best = this.combinations.filter(function (combination) {
-            return combination['accessibility'].length === this.highest;
-        }, this);
-
-        return best;
+        return this.combinations.filter(
+            (combination) =>
+                combination['accessibility'].length === this.highest
+        );
     }
 }
 
