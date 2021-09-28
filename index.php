@@ -2,25 +2,12 @@
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
-function getValue($value = null)
-{
-    if (is_array($value)) {
-        return $value[0];
-    }
-
-    return $value;
-}
-
 Kirby::plugin('hananils/kirby-colors', [
     'fields' => [
         'colors' => [
             'props' => [
                 'value' => function ($value = null) {
-                    if (is_array($value)) {
-                        return $value[0];
-                    }
-
-                    return $value;
+                    return is_array($value) ? $value[0] : $value;
                 },
                 'help' => function ($help = null) {
                     return $help;
