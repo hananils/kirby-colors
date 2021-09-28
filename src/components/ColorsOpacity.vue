@@ -32,11 +32,10 @@ export default {
 
     methods: {
         store(value) {
-            let opacity = parseInt(value, 10);
-            let space = this.color.toSpace();
+            const opacity = parseInt(value, 10);
+            const space = this.color.toSpace();
 
             this.color.setAlpha(opacity);
-
             this.$emit('change-opacity', this.color.toString(space));
         }
     }

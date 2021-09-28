@@ -27,7 +27,7 @@ export default {
 
     computed: {
         value() {
-            return this.color.toOriginal() ? this.color.toString('hex') : '';
+            return this.color.toOriginal() ? this.color.toString('hex') : null;
         },
 
         hex() {

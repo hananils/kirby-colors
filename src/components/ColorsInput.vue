@@ -129,7 +129,7 @@ export default {
         hex() {
             return this.color.toOriginal()
                 ? this.color.toString('hex').substr(1, 6)
-                : '';
+                : null;
         },
 
         rgb() {

@@ -10,7 +10,7 @@
             class="k-colors-color"
             :style="{ background: value }"
             :data-rating="rating"
-        ></div>
+        />
     </k-input>
 </template>
 
