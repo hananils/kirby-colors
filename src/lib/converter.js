@@ -120,7 +120,7 @@ class Converter {
     convertValueToDecimal(value) {
         let number = parseFloat(value);
 
-        if (number < 1 && value.toString().indexOf('%') === -1) {
+        if (number < 1 && !value.toString().includes('%')) {
             number = number * 100;
         }
 

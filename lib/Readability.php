@@ -32,7 +32,7 @@ class Readability
             $this->combinations[] = [
                 'color' => $color,
                 'contrast' => $ratio,
-                'accessibility' => $rating,
+                'accessibility' => $rating
             ];
         }
     }
@@ -118,7 +118,7 @@ class Readability
     {
         $report = [
             'color' => $this->color,
-            'combinations' => $this->combinations,
+            'combinations' => $this->combinations
         ];
 
         return $report;

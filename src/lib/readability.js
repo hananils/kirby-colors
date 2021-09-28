@@ -14,22 +14,22 @@ class Readability {
         this.combinations = [];
         this.highest = 0;
 
-        combinations.forEach(function (combination) {
-            let color = new Color(combination);
-            let ratio = this.setContrastRatio(color);
-            let rating = this.setRating(ratio);
+        for (const combination of combinations) {
+            const color = new Color(combination);
+            const contrast = this.setContrastRatio(color);
+            const accessibility = this.setRating(contrast);
 
             this.combinations.push({
-                color: color,
-                contrast: ratio,
-                accessibility: rating
+                color,
+                contrast,
+                accessibility
             });
-        }, this);
+        }
     }
 
     setContrastRatio(combination) {
-        let base = this.getLuminance(this.color);
-        let comparison = this.getLuminance(combination);
+        const base = this.getLuminance(this.color);
+        const comparison = this.getLuminance(combination);
 
         if (base > comparison) {
             return (base + 0.05) / (comparison + 0.05);
@@ -42,7 +42,7 @@ class Readability {
      * See: https://www.w3.org/TR/WCAG20/#visual-audio-contrast
      */
     setRating(ratio) {
-        let ratings = [];
+        const ratings = [];
 
         if (ratio >= 3) {
             ratings.push('aaLarge');
@@ -71,7 +71,7 @@ class Readability {
      * See: http://www.w3.org/TR/2008/REC-WCAG20-20081211/#relativeluminancedef
      */
     getLuminance(color) {
-        let values = color.toValues();
+        const values = color.toValues();
 
         const red = values.r / 255;
         const green = values.g / 255;
@@ -107,20 +107,17 @@ class Readability {
      */
 
     toReport() {
-        let report = {
+        return {
             color: this.color,
             combinations: this.combinations
         };
-
-        return report;
     }
 
     toMostReadable() {
-        let best = this.combinations.filter(function (combination) {
-            return combination['accessibility'].length === this.highest;
-        }, this);
-
-        return best;
+        return this.combinations.filter(
+            (combination) =>
+                combination['accessibility'].length === this.highest
+        );
     }
 }
 

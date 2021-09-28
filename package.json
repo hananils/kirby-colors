@@ -1,25 +1,19 @@
 {
-    "scripts": {
-        "dev": "parcel watch src/index.js --no-source-maps -d ./",
-        "build": "parcel build src/index.js --no-source-maps --experimental-scope-hoisting -d ./"
-    },
-    "posthtml": {
-        "recognizeSelfClosing": true
-    },
+    "private": true,
     "name": "kirby-colors",
     "description": "Colors is a field for Kirby 3 that allows the selection of a color using the native color selector. Colors can be viewed and edited in either HEX, RGB or HSL. Additionally, the field automatically calculates the most readable contrast color. This can be useful, if you'd like to specify background colors and would like to adjust the text colors accordingly. The field displays the color contrast ratings AA, AALarge, AAA and AAALarge according to WCAG accessibility guidelines.",
-    "version": "1.0.0",
-    "main": "index.js",
-    "directories": {
-        "src": "src"
-    },
-    "dependencies": {
-        "vue": "^2.6.12",
-        "vue-hot-reload-api": "^2.3.4"
+    "scripts": {
+        "dev": "npx -y kirbyup src/index.js --watch",
+        "build": "npx -y kirbyup src/index.js",
+        "lint": "eslint \"src/**/*.{js,vue}\"",
+        "lint:fix": "npm run lint -- --fix",
+        "format": "prettier --write \"{lib,src}/**/*.{php,js,vue}\" \"index.php\""
     },
     "devDependencies": {
-        "@vue/component-compiler-utils": "^3.2.0",
-        "cssnano": "^4.1.10",
-        "vue-template-compiler": "^2.6.12"
+        "@prettier/plugin-php": "^0.17.5",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-vue": "^7.18.0",
+        "prettier": "^2.4.1"
     }
 }
