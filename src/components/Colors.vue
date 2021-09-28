@@ -1,10 +1,12 @@
 <template>
     <k-field
         v-bind="$props"
-        :class="{
-            'k-colors-field': true,
-            'shows-contrast': contrast !== false
-        }"
+        :class="[
+            'k-colors-field',
+            {
+                'shows-contrast': contrast !== false
+            }
+        ]"
     >
         <k-input
             :id="_uid"
@@ -42,7 +44,7 @@ export default {
         name: [String, Number],
         label: String,
         value: Array,
-        contrast: Object,
+        contrast: [Boolean, Array],
         readability: Boolean,
         alpha: Boolean,
         invalid: Boolean,
