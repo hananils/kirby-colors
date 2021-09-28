@@ -127,7 +127,7 @@ class Color
             'h' => 0,
             's' => 0,
             'l' => 100,
-            'a' => 100,
+            'a' => 100
         ]);
     }
 
@@ -292,7 +292,7 @@ class Color
             'h' => round($this->h, $precision),
             's' => round($this->s, $precision),
             'l' => round($this->l, $precision),
-            'a' => round($this->a, $precision),
+            'a' => round($this->a, $precision)
         ];
     }
 
@@ -304,7 +304,7 @@ class Color
             'b' => $this->convertDecimalToHex($this->b),
             'a' => $this->convertDecimalToHex(
                 $this->rebaseDecimalForHex($this->a)
-            ),
+            )
         ];
     }
 
@@ -314,7 +314,7 @@ class Color
             'r' => round($this->r, $precision),
             'g' => round($this->g, $precision),
             'b' => round($this->b, $precision),
-            'a' => $this->convertToFloat($this->a, $precision),
+            'a' => $this->convertToFloat($this->a, $precision)
         ];
     }
 
@@ -324,7 +324,7 @@ class Color
             'h' => round($this->h, $precision),
             's' => round($this->s, $precision),
             'l' => round($this->l, $precision),
-            'a' => $this->convertToFloat($this->a, $precision),
+            'a' => $this->convertToFloat($this->a, $precision)
         ];
     }
 

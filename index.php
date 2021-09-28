@@ -30,12 +30,12 @@ Kirby::plugin('hananils/kirby-colors', [
                 },
                 'contrast' => function ($contrast = false) {
                     return $contrast;
-                },
+                }
             ],
             'save' => function ($value) {
                 return $value;
-            },
-        ],
+            }
+        ]
     ],
     'fieldMethods' => [
         'isHex' => function ($field) {
@@ -111,6 +111,6 @@ Kirby::plugin('hananils/kirby-colors', [
             }
 
             return array_shift($readable)['color']->toString($space);
-        },
-    ],
+        }
+    ]
 ]);

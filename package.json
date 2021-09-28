@@ -7,9 +7,10 @@
         "build": "npx -y kirbyup src/index.js",
         "lint": "eslint \"src/**/*.{js,vue}\"",
         "lint:fix": "npm run lint -- --fix",
-        "format": "prettier --write \"src/**/*.{js,vue}\""
+        "format": "prettier --write \"{lib,src}/**/*.{php,js,vue}\" \"index.php\""
     },
     "devDependencies": {
+        "@prettier/plugin-php": "^0.17.5",
         "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-vue": "^7.18.0",
