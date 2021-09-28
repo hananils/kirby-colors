@@ -62,16 +62,16 @@ export default {
 .k-colors-contrast::before {
     content: '';
     position: absolute;
-    left: -24px;
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--dark-background);
+    left: -1.5rem;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--color-contrast-dark-background);
     border-radius: 50%;
     background-image: linear-gradient(
         to right,
-        var(--light-grey) 0%,
-        var(--light-grey) 50%,
-        var(--dark-background) 50%
+        var(--color-background) 0%,
+        var(--color-background) 50%,
+        var(--color-contrast-dark-background) 50%
     );
 }
 
@@ -80,7 +80,7 @@ export default {
     position: absolute;
     top: -1.725rem;
     right: 0;
-    color: var(--dark);
+    color: var(--color-contrast-dark);
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;

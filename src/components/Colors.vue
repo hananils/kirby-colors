@@ -90,16 +90,8 @@ export default {
 
 <style>
 .k-colors-field {
-    --dark: #16171a;
-    --dark-background: #2d2f36;
-    --muted-grey: #777;
-    --border-grey: #ccc;
-    --light-grey: #efefef;
-    --white: #fff;
-    --positive: #5d800d;
-    --negative: #c82829;
-    --focus: #4271ae;
-    --notice: #f5871f;
+    --color-contrast-dark: #16171a;
+    --color-contrast-dark-background: #2d2f36;
 }
 
 .k-colors-field.shows-contrast {

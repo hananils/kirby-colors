@@ -57,7 +57,7 @@ export default {
     top: 0.25rem;
     left: 0;
     bottom: 0.25rem;
-    border-left: 1px solid var(--border-grey);
+    border-left: 1px solid var(--color-border);
 }
 
 .k-colors-input.is-alpha {
@@ -70,6 +70,6 @@ export default {
 .k-colors-opacity span {
     width: 1rem;
     margin-left: 0.1rem;
-    color: var(--border-grey);
+    color: var(--color-border);
 }
 </style>

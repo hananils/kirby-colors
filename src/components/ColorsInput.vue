@@ -197,12 +197,12 @@ export default {
     align-items: center;
     min-width: 0;
     height: 2.25rem;
-    color: var(--border-grey);
+    color: var(--color-border);
     font-size: 0.875rem;
 }
 
 .k-colors-label:focus-within {
-    color: var(--border-grey);
+    color: var(--color-border);
 }
 
 .k-colors-label span {
@@ -223,7 +223,7 @@ export default {
 
 .k-colors-input:focus,
 .k-colors-input:active {
-    color: var(--focus);
+    color: var(--color-focus);
 }
 
 .k-colors-input.is-hex {

@@ -33,7 +33,7 @@ export default {
         hex() {
             return this.color.toOriginal()
                 ? this.color.toString('hex').substring(0, 7)
-                : '';
+                : null;
         }
     },
 
@@ -71,7 +71,7 @@ export default {
     overflow: hidden;
     width: 2.25rem;
     height: 2.25rem;
-    border-right: 1px solid var(--border-grey);
+    border-right: 1px solid var(--color-border);
 }
 
 .k-colors-picker {
