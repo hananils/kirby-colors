@@ -1,10 +1,6 @@
 {
-    "printWidth": 80,
-    "semi": true,
     "singleQuote": true,
     "trailingComma": "none",
-    "bracketSpacing": true,
-    "jsxBracketSameLine": true,
-    "phpVersion": "7.3",
+    "phpVersion": "7.4",
     "trailingCommaPHP": false
 }

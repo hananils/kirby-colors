@@ -19,21 +19,23 @@ import input from '../mixins/input';
 
 export default {
     mixins: [input],
+
     props: {
         color: Object
     },
+
     computed: {
         opacity() {
             return this.color.getAlpha();
         }
     },
+
     methods: {
         store(value) {
-            let opacity = parseInt(value, 10);
-            let space = this.color.toSpace();
+            const opacity = parseInt(value, 10);
+            const space = this.color.toSpace();
 
             this.color.setAlpha(opacity);
-
             this.$emit('change-opacity', this.color.toString(space));
         }
     }
@@ -54,7 +56,7 @@ export default {
     top: 0.25rem;
     left: 0;
     bottom: 0.25rem;
-    border-left: 1px solid var(--border-grey);
+    border-left: 1px solid var(--color-border);
 }
 
 .k-colors-input.is-alpha {
@@ -67,6 +69,6 @@ export default {
 .k-colors-opacity span {
     width: 1rem;
     margin-left: 0.1rem;
-    color: var(--border-grey);
+    color: var(--color-border);
 }
 </style>

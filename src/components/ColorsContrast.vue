@@ -1,7 +1,7 @@
 <template>
     <k-input
-        ref="input"
         :id="_uid"
+        ref="input"
         v-bind="$props"
         theme="field"
         class="k-colors-contrast"
@@ -10,7 +10,7 @@
             class="k-colors-color"
             :style="{ background: value }"
             :data-rating="rating"
-        ></div>
+        />
     </k-input>
 </template>
 
@@ -20,6 +20,7 @@ export default {
         color: Object,
         contrast: [Boolean, Array]
     },
+
     computed: {
         readable() {
             let colors = this.contrast;
@@ -30,25 +31,23 @@ export default {
 
             return this.color.toMostReadable(colors);
         },
+
         rating() {
-            if (this.readable.length) {
-                const [readable] = this.readable;
-
-                return readable.accessibility[
-                    readable.accessibility.length - 1
-                ];
+            if (!this.readable.length) {
+                return null;
             }
 
-            return;
+            const [readable] = this.readable;
+            return readable.accessibility[readable.accessibility.length - 1];
         },
-        value() {
-            if (this.readable.length) {
-                const [readable] = this.readable;
 
-                return readable.color.toString();
+        value() {
+            if (!this.readable.length) {
+                return null;
             }
 
-            return;
+            const [readable] = this.readable;
+            return readable.color.toString();
         }
     }
 };
@@ -63,16 +62,16 @@ export default {
 .k-colors-contrast::before {
     content: '';
     position: absolute;
-    left: -24px;
-    width: 16px;
-    height: 16px;
-    border: 2px solid var(--dark-background);
+    left: -1.5rem;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--color-contrast-dark-background);
     border-radius: 50%;
     background-image: linear-gradient(
         to right,
-        var(--light-grey) 0%,
-        var(--light-grey) 50%,
-        var(--dark-background) 50%
+        var(--color-background) 0%,
+        var(--color-background) 50%,
+        var(--color-contrast-dark-background) 50%
     );
 }
 
@@ -81,7 +80,7 @@ export default {
     position: absolute;
     top: -1.725rem;
     right: 0;
-    color: var(--dark);
+    color: var(--color-contrast-dark);
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;

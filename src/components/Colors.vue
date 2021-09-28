@@ -1,47 +1,63 @@
 <template>
     <k-field
         v-bind="$props"
-        :class="{
-            'k-colors-field': true,
-            'shows-contrast': contrast !== false
-        }"
+        :class="[
+            'k-colors-field',
+            {
+                'shows-contrast': contrast !== false
+            }
+        ]"
     >
         <k-input
-            ref="input"
             :id="_uid"
+            ref="input"
             v-bind="$props"
             theme="field"
             type="colors"
-            @input="onInput"
+            @input="store"
         >
-            <k-colors-picker :color="color" @input="onInput" />
-            <k-colors-input :color="color" :space="space" @input="onInput" />
-            <k-colors-opacity
-                :color="color"
+            <colors-picker :color="color" @input="store" />
+            <colors-input :color="color" :space="space" @input="store" />
+            <colors-opacity
                 v-if="alpha !== false"
-                @change-opacity="onChangeOpacity"
+                :color="color"
+                @change-opacity="store"
             />
-            <k-colors-spaces :space="space" @change-space="onChangeSpace" />
+            <colors-spaces :space="space" @change-space="onChangeSpace" />
         </k-input>
 
-        <k-colors-contrast
+        <colors-contrast
+            v-if="contrast !== false"
             :color="color"
             :contrast="contrast"
-            v-if="contrast !== false"
         />
     </k-field>
 </template>
 
 <script>
+import ColorsContrast from './ColorsContrast.vue';
+import ColorsInput from './ColorsInput.vue';
+import ColorsOpacity from './ColorsOpacity.vue';
+import ColorsPicker from './ColorsPicker.vue';
+import ColorsSpaces from './ColorsSpaces.vue';
 import Color from '../lib/color';
 
 export default {
+    components: {
+        ColorsContrast,
+        ColorsInput,
+        ColorsOpacity,
+        ColorsPicker,
+        ColorsSpaces
+    },
+
     inheritAttrs: false,
+
     props: {
         name: [String, Number],
         label: String,
         value: Array,
-        contrast: Object,
+        contrast: [Boolean, Array],
         readability: Boolean,
         alpha: Boolean,
         invalid: Boolean,
@@ -49,9 +65,10 @@ export default {
         required: Boolean,
         help: String
     },
+
     computed: {
         color() {
-            let color = new Color(this.value);
+            const color = new Color(this.value);
 
             if (this.alpha === false) {
                 color.setAlpha(100);
@@ -59,21 +76,18 @@ export default {
 
             return color;
         },
+
         space() {
             return this.color.toSpace();
         }
     },
+
     methods: {
-        onInput(value) {
-            this.store(value);
-        },
         onChangeSpace(format) {
             this.color.setSpace(format);
             this.store(this.color.toString());
         },
-        onChangeOpacity(value) {
-            this.store(value);
-        },
+
         store(value) {
             this.$emit('input', value);
         }
@@ -83,16 +97,8 @@ export default {
 
 <style>
 .k-colors-field {
-    --dark: #16171a;
-    --dark-background: #2d2f36;
-    --muted-grey: #777;
-    --border-grey: #ccc;
-    --light-grey: #efefef;
-    --white: #fff;
-    --positive: #5d800d;
-    --negative: #c82829;
-    --focus: #4271ae;
-    --notice: #f5871f;
+    --color-contrast-dark: #16171a;
+    --color-contrast-dark-background: #2d2f36;
 }
 
 .k-colors-field.shows-contrast {

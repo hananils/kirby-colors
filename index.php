@@ -2,25 +2,12 @@
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
-function getValue($value = null)
-{
-    if (is_array($value)) {
-        return $value[0];
-    }
-
-    return $value;
-}
-
 Kirby::plugin('hananils/kirby-colors', [
     'fields' => [
         'colors' => [
             'props' => [
                 'value' => function ($value = null) {
-                    if (is_array($value)) {
-                        return $value[0];
-                    }
-
-                    return $value;
+                    return is_array($value) ? $value[0] : $value;
                 },
                 'help' => function ($help = null) {
                     return $help;
@@ -30,28 +17,28 @@ Kirby::plugin('hananils/kirby-colors', [
                 },
                 'contrast' => function ($contrast = false) {
                     return $contrast;
-                },
+                }
             ],
             'save' => function ($value) {
                 return $value;
-            },
-        ],
+            }
+        ]
     ],
     'fieldMethods' => [
         'isHex' => function ($field) {
             $color = $field->toClass($field);
-            return $color->isHex($value);
+            return $color->toSpace() === 'hex';
         },
         'isRgb' => function ($field) {
             $color = $field->toClass($field);
-            return $color->isRgb($value);
+            return $color->toSpace() === 'rgb';
         },
         'isHsl' => function ($field) {
             $color = $field->toClass($field);
-            return $color->isHsl($value);
+            return $color->toSpace() === 'hsl';
         },
         'toClass' => function ($field) {
-            $value = getValue($field->value);
+            $value = is_array($field->value) ? $field->value[0] : $field->value;
             return new Hananils\Color($value);
         },
         'toColor' => function ($field, $space = null) {
@@ -111,6 +98,6 @@ Kirby::plugin('hananils/kirby-colors', [
             }
 
             return array_shift($readable)['color']->toString($space);
-        },
-    ],
+        }
+    ]
 ]);

@@ -3,9 +3,10 @@ export default {
         onInput(event) {
             this.store(event.target.value);
         },
+
         onUp(event) {
-            let input = event.target;
-            let max = input.getAttribute('max');
+            const input = event.target;
+            const max = input.getAttribute('max');
 
             if (!max) {
                 return;
@@ -26,9 +27,10 @@ export default {
 
             this.store(value, input);
         },
+
         onDown(event) {
-            let input = event.target;
-            let min = input.getAttribute('min');
+            const input = event.target;
+            const min = input.getAttribute('min');
 
             if (!min) {
                 return;
