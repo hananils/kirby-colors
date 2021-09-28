@@ -17,7 +17,7 @@ class Readability {
         for (const combination of combinations) {
             const color = new Color(combination);
             const contrast = this.setContrastRatio(color);
-            const accessibility = this.setRating(accessibility);
+            const accessibility = this.setRating(contrast);
 
             this.combinations.push({
                 color,
