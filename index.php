@@ -40,15 +40,15 @@ Kirby::plugin('hananils/kirby-colors', [
     'fieldMethods' => [
         'isHex' => function ($field) {
             $color = $field->toClass($field);
-            return $color->isHex($value);
+            return $color->toSpace() === 'hex';
         },
         'isRgb' => function ($field) {
             $color = $field->toClass($field);
-            return $color->isRgb($value);
+            return $color->toSpace() === 'rgb';
         },
         'isHsl' => function ($field) {
             $color = $field->toClass($field);
-            return $color->isHsl($value);
+            return $color->toSpace() === 'hsl';
         },
         'toClass' => function ($field) {
             $value = is_array($field->value) ? $field->value[0] : $field->value;
