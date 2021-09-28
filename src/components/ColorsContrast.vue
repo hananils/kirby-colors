@@ -1,7 +1,7 @@
 <template>
     <k-input
-        ref="input"
         :id="_uid"
+        ref="input"
         v-bind="$props"
         theme="field"
         class="k-colors-contrast"
@@ -20,6 +20,7 @@ export default {
         color: Object,
         contrast: [Boolean, Array]
     },
+
     computed: {
         readable() {
             let colors = this.contrast;
@@ -30,25 +31,23 @@ export default {
 
             return this.color.toMostReadable(colors);
         },
+
         rating() {
-            if (this.readable.length) {
-                const [readable] = this.readable;
-
-                return readable.accessibility[
-                    readable.accessibility.length - 1
-                ];
+            if (!this.readable.length) {
+                return '';
             }
 
-            return;
+            const [readable] = this.readable;
+            return readable.accessibility[readable.accessibility.length - 1];
         },
-        value() {
-            if (this.readable.length) {
-                const [readable] = this.readable;
 
-                return readable.color.toString();
+        value() {
+            if (!this.readable.length) {
+                return '';
             }
 
-            return;
+            const [readable] = this.readable;
+            return readable.color.toString();
         }
     }
 };

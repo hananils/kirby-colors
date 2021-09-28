@@ -16,7 +16,7 @@ class Color extends Converter {
         this.a = 100;
 
         if (color instanceof Color) {
-            let values = color.toValues();
+            const values = color.toValues();
             this.setValues(values);
         } else if (this.isHex(color)) {
             this.original = color;
@@ -44,7 +44,7 @@ class Color extends Converter {
             return false;
         }
 
-        return string.indexOf('#') === 0;
+        return string.startsWith('#');
     }
 
     isRgb(string) {
@@ -52,7 +52,7 @@ class Color extends Converter {
             return false;
         }
 
-        return string.indexOf('rgb') === 0;
+        return string.startsWith('rgb');
     }
 
     isHsl(string) {
@@ -60,7 +60,7 @@ class Color extends Converter {
             return false;
         }
 
-        return string.indexOf('hsl') === 0;
+        return string.startsWith('hsl');
     }
 
     hasAlpha() {
@@ -88,15 +88,15 @@ class Color extends Converter {
     }
 
     parseRgb(string) {
-        let matches = string.match(/\((.*)\)/);
-        let values = matches[1].split(/[\s,\/]+/);
+        const matches = string.match(/\((.*)\)/);
+        const values = matches[1].split(/[\s,/]+/);
 
         this.setRgb(values);
     }
 
     parseHsl(string) {
-        let matches = string.match(/\((.*)\)/);
-        let values = matches[1].split(/[\s,\/]+/);
+        const matches = string.match(/\((.*)\)/);
+        const values = matches[1].split(/[\s,/]+/);
 
         this.setHsl(values);
     }
@@ -231,12 +231,12 @@ class Color extends Converter {
      */
 
     toReadabilityReport(combinations = ['#fff', '#000']) {
-        let readability = new Readability(this, combinations);
+        const readability = new Readability(this, combinations);
         return readability.toReport();
     }
 
     toMostReadable(combinations = ['#fff', '#000']) {
-        let readability = new Readability(this, combinations);
+        const readability = new Readability(this, combinations);
         return readability.toMostReadable();
     }
 
@@ -252,7 +252,7 @@ class Color extends Converter {
         return this.space;
     }
 
-    toValues(precision = 0) {
+    toValues() {
         return {
             original: this.original,
             space: this.space,
@@ -275,7 +275,7 @@ class Color extends Converter {
         };
     }
 
-    toRgb(precision = 0) {
+    toRgb() {
         return {
             r: this.round(this.r),
             g: this.round(this.g),
@@ -284,7 +284,7 @@ class Color extends Converter {
         };
     }
 
-    toHsl(precision = 0) {
+    toHsl() {
         return {
             h: this.round(this.h),
             s: this.round(this.s),
@@ -298,7 +298,7 @@ class Color extends Converter {
             format = this.toSpace();
         }
 
-        if (format.indexOf('hsl') === 0) {
+        if (format.startsWith('hsl')) {
             const hsl = this.toHsl();
 
             if (this.a < 100) {
@@ -306,7 +306,7 @@ class Color extends Converter {
             } else {
                 return `hsla(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
             }
-        } else if (format.indexOf('rgb') === 0) {
+        } else if (format.startsWith('rgb')) {
             const rgb = this.toRgb();
 
             if (this.a < 100) {

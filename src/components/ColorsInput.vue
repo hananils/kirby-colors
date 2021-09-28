@@ -4,46 +4,46 @@
             <label class="k-colors-label">
                 <span>R</span>
                 <input
-                    class="k-colors-input"
                     ref="r"
+                    class="k-colors-input"
                     data-unit="r"
                     :value="rgb.r"
                     type="text"
+                    min="0"
+                    max="255"
                     @input="onInput"
                     @keydown.up.prevent="onUp"
                     @keydown.down.prevent="onDown"
-                    min="0"
-                    max="255"
                 />
             </label>
             <label class="k-colors-label">
                 <span>G</span>
                 <input
-                    class="k-colors-input"
                     ref="g"
+                    class="k-colors-input"
                     data-unit="g"
                     :value="rgb.g"
                     type="text"
+                    min="0"
+                    max="255"
                     @input="onInput"
                     @keydown.up.prevent="onUp"
                     @keydown.down.prevent="onDown"
-                    min="0"
-                    max="255"
                 />
             </label>
             <label class="k-colors-label">
                 <span>B</span>
                 <input
-                    class="k-colors-input"
                     ref="b"
+                    class="k-colors-input"
                     data-unit="b"
                     :value="rgb.b"
                     type="text"
+                    min="0"
+                    max="255"
                     @input="onInput"
                     @keydown.up.prevent="onUp"
                     @keydown.down.prevent="onDown"
-                    min="0"
-                    max="255"
                 />
             </label>
         </template>
@@ -51,46 +51,46 @@
             <label class="k-colors-label">
                 <span>H</span>
                 <input
-                    class="k-colors-input"
                     ref="h"
+                    class="k-colors-input"
                     data-unit="h"
                     :value="hsl.h"
                     type="text"
+                    min="0"
+                    max="360"
                     @input="onInput"
                     @keydown.up.prevent="onUp"
                     @keydown.down.prevent="onDown"
-                    min="0"
-                    max="360"
                 />
             </label>
             <label class="k-colors-label">
                 <span>S</span>
                 <input
-                    class="k-colors-input"
                     ref="s"
+                    class="k-colors-input"
                     data-unit="s"
                     :value="hsl.s"
                     type="text"
+                    min="0"
+                    max="100"
                     @input="onInput"
                     @keydown.up.prevent="onUp"
                     @keydown.down.prevent="onDown"
-                    min="0"
-                    max="100"
                 />
             </label>
             <label class="k-colors-label">
                 <span>L</span>
                 <input
-                    class="k-colors-input"
                     ref="l"
+                    class="k-colors-input"
                     data-unit="l"
                     :value="hsl.l"
                     type="text"
+                    min="0"
+                    max="100"
                     @input="onInput"
                     @keydown.up.prevent="onUp"
                     @keydown.down.prevent="onDown"
-                    min="0"
-                    max="100"
                 />
             </label>
         </template>
@@ -98,8 +98,8 @@
             <label class="k-colors-label">
                 <span>#</span>
                 <input
-                    class="k-colors-input is-hex"
                     ref="hex"
+                    class="k-colors-input is-hex"
                     :value="hex"
                     type="text"
                     @change="onInput"
@@ -110,10 +110,12 @@
 </template>
 
 <script>
+import Color from '../lib/color';
 import input from '../mixins/input';
 
 export default {
     mixins: [input],
+
     props: {
         color: {
             validator: function (value) {
@@ -122,25 +124,29 @@ export default {
         },
         space: String
     },
+
     computed: {
         hex() {
-            if (this.color.toOriginal()) {
-                return this.color.toString('hex').substr(1, 6);
-            }
+            return this.color.toOriginal()
+                ? this.color.toString('hex').substr(1, 6)
+                : '';
         },
+
         rgb() {
             return this.color.toRgb();
         },
+
         hsl() {
             return this.color.toHsl();
         }
     },
+
     methods: {
         store(value, input) {
             const fields = this.$refs;
             let values = {};
 
-            if (!value && value !== 0) {
+            if (!value) {
                 this.$emit('input', '');
                 return;
             }

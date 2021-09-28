@@ -8,20 +8,23 @@
         />
         <k-dropdown-content ref="dropdown" align="right">
             <k-dropdown-item
-                @click="showHex"
                 :class="{ 'is-current': space === 'hex' }"
-                >HEX</k-dropdown-item
+                @click="showHex"
             >
+                HEX
+            </k-dropdown-item>
             <k-dropdown-item
-                @click="showRgb"
                 :class="{ 'is-current': space === 'rgb' }"
-                >RGB</k-dropdown-item
+                @click="showRgb"
             >
+                RGB
+            </k-dropdown-item>
             <k-dropdown-item
-                @click="showHsl"
                 :class="{ 'is-current': space === 'hsl' }"
-                >HSL</k-dropdown-item
+                @click="showHsl"
             >
+                HSL
+            </k-dropdown-item>
         </k-dropdown-content>
     </k-dropdown>
 </template>
@@ -31,13 +34,16 @@ export default {
     props: {
         space: String
     },
+
     methods: {
         showHex() {
             this.$emit('change-space', 'hex');
         },
+
         showRgb() {
             this.$emit('change-space', 'rgb');
         },
+
         showHsl() {
             this.$emit('change-space', 'hsl');
         }
@@ -52,7 +58,7 @@ export default {
 
 .k-colors-field .k-dropdown-item {
     justify-content: flex-end;
-    padding-left: 8px;
+    padding-left: 0.5rem;
 }
 
 .k-colors-field .k-dropdown-item.is-current::before {
@@ -62,6 +68,6 @@ export default {
 
 .k-colors-space-button {
     height: 2.25rem;
-    padding: 0 12px;
+    padding: 0 0.75rem;
 }
 </style>

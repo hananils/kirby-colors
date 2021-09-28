@@ -7,8 +7,8 @@
         }"
     >
         <k-input
-            ref="input"
             :id="_uid"
+            ref="input"
             v-bind="$props"
             theme="field"
             type="colors"
@@ -17,17 +17,17 @@
             <k-colors-picker :color="color" @input="onInput" />
             <k-colors-input :color="color" :space="space" @input="onInput" />
             <k-colors-opacity
-                :color="color"
                 v-if="alpha !== false"
+                :color="color"
                 @change-opacity="onChangeOpacity"
             />
             <k-colors-spaces :space="space" @change-space="onChangeSpace" />
         </k-input>
 
         <k-colors-contrast
+            v-if="contrast !== false"
             :color="color"
             :contrast="contrast"
-            v-if="contrast !== false"
         />
     </k-field>
 </template>
@@ -37,6 +37,7 @@ import Color from '../lib/color';
 
 export default {
     inheritAttrs: false,
+
     props: {
         name: [String, Number],
         label: String,
@@ -49,9 +50,10 @@ export default {
         required: Boolean,
         help: String
     },
+
     computed: {
         color() {
-            let color = new Color(this.value);
+            const color = new Color(this.value);
 
             if (this.alpha === false) {
                 color.setAlpha(100);
@@ -59,21 +61,26 @@ export default {
 
             return color;
         },
+
         space() {
             return this.color.toSpace();
         }
     },
+
     methods: {
         onInput(value) {
             this.store(value);
         },
+
         onChangeSpace(format) {
             this.color.setSpace(format);
             this.store(this.color.toString());
         },
+
         onChangeOpacity(value) {
             this.store(value);
         },
+
         store(value) {
             this.$emit('input', value);
         }

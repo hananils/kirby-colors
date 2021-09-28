@@ -19,14 +19,17 @@ import input from '../mixins/input';
 
 export default {
     mixins: [input],
+
     props: {
         color: Object
     },
+
     computed: {
         opacity() {
             return this.color.getAlpha();
         }
     },
+
     methods: {
         store(value) {
             let opacity = parseInt(value, 10);

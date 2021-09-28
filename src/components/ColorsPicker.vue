@@ -4,8 +4,8 @@
             <input
                 class="k-colors-picker"
                 type="color"
-                @input="onInput"
                 :value="hex"
+                @input="onInput"
             />
         </label>
     </div>
@@ -18,21 +18,25 @@ export default {
     props: {
         color: Object
     },
-    data: {
-        init: false
+
+    data() {
+        return {
+            init: false
+        };
     },
+
     computed: {
         value() {
-            if (this.color.toOriginal()) {
-                return this.color.toString('hex');
-            }
+            return this.color.toOriginal() ? this.color.toString('hex') : '';
         },
+
         hex() {
-            if (this.color.toOriginal()) {
-                return this.color.toString('hex').substring(0, 7);
-            }
+            return this.color.toOriginal()
+                ? this.color.toString('hex').substring(0, 7)
+                : '';
         }
     },
+
     methods: {
         onInput(event) {
             if (!this.init) {
@@ -40,8 +44,8 @@ export default {
                 return;
             }
 
-            let color = new Color(event.target.value);
-            let space = this.color.toSpace();
+            const color = new Color(event.target.value);
+            const space = this.color.toSpace();
 
             color.setAlpha(this.color.getAlpha());
 
