@@ -24,13 +24,13 @@ composer require hananils/kirby-colors
 
 This field is provided under the type `colors`:
 
--   `alpha`: allows you to enable or disable the opacity widget, either `true` or `false`.
--   `contrast`: allows you to enable or disable the contrast widget that calculated the most readable contrast color, either `true` or `false` or an array of colors the plugin should choose from.
--   `default`: the color to be used as default, either in hex3, hex6, hex8, rgb, rgba, hsl or hsla.
+- `alpha`: allows you to enable or disable the opacity widget, either `true` or `false`.
+- `contrast`: allows you to enable or disable the contrast widget that calculated the most readable contrast color, either `true` or `false` or an array of colors the plugin should choose from.
+- `default`: the color to be used as default, either in hex3, hex6, hex8, rgb, rgba, hsl or hsla.
 
 ### Examples
 
-![example 1](https://github.com/hananils/kirby-colors/blob/main/screenshots/kirby-color_example1.png)
+![example 1](./.github/screenshot-kirby-color-1.png)
 
 ```yml
 colors:
@@ -38,7 +38,7 @@ colors:
     label: Colors
 ```
 
-![example 2](https://github.com/hananils/kirby-colors/blob/main/screenshots/kirby-color_example2.png)
+![example 2](./.github/screenshot-kirby-color-2.png)
 
 ```yml
 colors:
@@ -47,7 +47,7 @@ colors:
     alpha: true
 ```
 
-![example 3](https://github.com/hananils/kirby-colors/blob/main/screenshots/kirby-color_example3.png)
+![example 3](./.github/screenshot-kirby-color-3.png)
 
 ```yml
 colors:
@@ -57,7 +57,7 @@ colors:
     contrast: true
 ```
 
-![example 4](https://github.com/hananils/kirby-colors/blob/main/screenshots/kirby-color_example4.png)
+![example 4](./.github/screenshot-kirby-color-4.png)
 
 ```yml
 colors:
