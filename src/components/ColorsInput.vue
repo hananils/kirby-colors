@@ -119,7 +119,7 @@ export default {
     props: {
         color: {
             validator: function (value) {
-                value instanceof Color;
+                return value instanceof Color;
             }
         },
         space: String
@@ -177,8 +177,8 @@ export default {
             }
 
             this.$emit('input', this.color.toString());
-        }
-    }
+        },
+    },
 };
 </script>
 
