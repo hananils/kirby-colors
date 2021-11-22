@@ -2,7 +2,7 @@
     <div class="k-colors-units">
         <template v-if="space === 'rgb'">
             <label class="k-colors-label">
-                <span>R</span>
+                <span @mousedown.prevent="onMouseDown($event,$refs.r)">R</span>
                 <input
                     ref="r"
                     class="k-colors-input"
@@ -17,7 +17,7 @@
                 />
             </label>
             <label class="k-colors-label">
-                <span>G</span>
+                <span @mousedown.prevent="onMouseDown($event,$refs.g)">G</span>
                 <input
                     ref="g"
                     class="k-colors-input"
@@ -32,7 +32,7 @@
                 />
             </label>
             <label class="k-colors-label">
-                <span>B</span>
+                <span @mousedown.prevent="onMouseDown($event,$refs.b)">B</span>
                 <input
                     ref="b"
                     class="k-colors-input"
@@ -49,7 +49,7 @@
         </template>
         <template v-else-if="space === 'hsl'">
             <label class="k-colors-label">
-                <span>H</span>
+                <span @mousedown.prevent="onMouseDown($event,$refs.h)">H</span>
                 <input
                     ref="h"
                     class="k-colors-input"
@@ -64,7 +64,7 @@
                 />
             </label>
             <label class="k-colors-label">
-                <span>S</span>
+                <span @mousedown.prevent="onMouseDown($event,$refs.s)">S</span>
                 <input
                     ref="s"
                     class="k-colors-input"
@@ -79,7 +79,7 @@
                 />
             </label>
             <label class="k-colors-label">
-                <span>L</span>
+                <span @mousedown.prevent="onMouseDown($event,$refs.l)">L</span>
                 <input
                     ref="l"
                     class="k-colors-input"
@@ -142,6 +142,7 @@ export default {
     },
 
     methods: {
+        // Used by [onUp,onDown,onMouseUp,onMouseDown,onMouseMove] to modify the values
         store(value, input) {
             const fields = this.$refs;
             let values = {};
