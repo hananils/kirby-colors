@@ -57,7 +57,6 @@ export default {
 
         // Function to handle changing values by incrementing with the mouse
         onMouseDown(e, inputRef){
-            //console.log('MouseDown!', e.pageY, inputRef);
             if(!this.dragActive && inputRef && e.pageY){
                 this.dragActive = true;
                 this.dragInputRef = inputRef;
@@ -69,10 +68,9 @@ export default {
             if(this.dragActive && this.dragInputRef && e.pageY){
                 // Get value
                 this.dragAmount = this.dragStart - e.pageY;
-                //console.log('MouseUp  !', this.dragAmount, this.dragInputRef);
 
                 // Apply color to store
-                this.dragInputRef.value = this.dragValue; // Needs to be reset so increment works
+                this.dragInputRef.value = this.dragValue; // Needs to be reset so increment works. Note: Creates a lag in the value change.
                 if(this.dragInputRef && this.dragAmount!==0) this.incrementInput(this.dragInputRef, this.dragAmount);
 
                 // Reset
@@ -86,7 +84,6 @@ export default {
         onMouseDrag(e){
             if(this.dragActive && this.dragInputRef && e.pageY){
 
-
                 // Calc value
                 const max = this.dragInputRef.getAttribute('max');
                 if (!max) return;
@@ -97,8 +94,6 @@ export default {
                 // Visually change the value without changing the store
                 this.dragInputRef.value = newValue;
 
-
-                //console.log('MouseDrag!', e.pageY, 'Diff=', this.dragAmount, 'NewValue=', this.dragValue + this.dragAmount);
             }
 
         },
