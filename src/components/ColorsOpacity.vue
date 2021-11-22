@@ -3,6 +3,8 @@
         <input
             class="k-colors-input is-alpha"
             :value="opacity"
+            ref="a"
+            data-unit="opacity"
             type="text"
             min="0"
             max="100"
@@ -10,7 +12,7 @@
             @keydown.up.prevent="onUp"
             @keydown.down.prevent="onDown"
         />
-        <span>%</span>
+        <span @mousedown.prevent="onMouseDown($event,$refs.a)">%</span>
     </label>
 </template>
 
@@ -31,7 +33,7 @@ export default {
     },
 
     methods: {
-        store(value) {
+        store(value, inputEl) {
             const opacity = parseInt(value, 10);
             const space = this.color.toSpace();
 

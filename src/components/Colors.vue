@@ -56,7 +56,7 @@ export default {
     props: {
         name: [String, Number],
         label: String,
-        value: Array,
+        value: String,
         contrast: [Boolean, Array],
         readability: Boolean,
         alpha: Boolean,

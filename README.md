@@ -200,7 +200,9 @@ This plugin bundles two classes, one for JavaScript and one for PHP, with the id
 1. Click on the left color preview to open the color picker.
 2. Click the arrow icon to switch between color spaces.
 3. When editing RGB or HSL colors, use the up and down arrow keys to adjust the value by +1 or -1.
-4. Hold the [meta key](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey) to adjust values by +10 or -10.
+4. Hold the [meta key](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey) (or the shift key) to adjust values by +10 or -10.
+5. Click on the grey unit indicator of a value then drag the mouse vertically to adjust the values on the fly.  
+   ![Drag-to-increment feature](./.github/tip5-dragfeature.gif)
 
 ## Alternatives
 
