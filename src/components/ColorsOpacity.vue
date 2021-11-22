@@ -31,7 +31,7 @@ export default {
     },
 
     methods: {
-        store(value) {
+        store(value, inputEl) {
             const opacity = parseInt(value, 10);
             const space = this.color.toSpace();
 
