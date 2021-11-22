@@ -28,10 +28,6 @@ export default {
 
             let value = parseInt(inputEl.value, 10);
 
-            if (event.metaKey) {
-                step *= 10;
-            }
-
             value = Math.min(value + step, max);
 
             if (value < 0) {
@@ -44,14 +40,14 @@ export default {
         // Keyboard up arrow press
         onUp(event) {
             const input = event.target;
-            this.incrementInput(input, 1);
+            this.incrementInput(input, event.metaKey?10:1);
             return;
         },
 
         // Keyboard down arrow press
         onDown(event) {
             const input = event.target;
-            this.incrementInput(input, -1);
+            this.incrementInput(input, event.metaKey?-10:-1);
             return;
         },
 
