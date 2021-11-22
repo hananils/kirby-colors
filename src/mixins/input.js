@@ -37,17 +37,21 @@ export default {
             this.store(value, inputEl);
         },
 
+        amplifyStepFromEvent(e, step=1, amplification=10){
+            return (event && (event.metaKey || event.shiftKey)) ? (step*amplification) : step;
+        },
+
         // Keyboard up arrow press
         onUp(event) {
             const input = event.target;
-            this.incrementInput(input, event.metaKey?10:1);
+            this.incrementInput(input, this.amplifyStepFromEvent(event,1));
             return;
         },
 
         // Keyboard down arrow press
         onDown(event) {
             const input = event.target;
-            this.incrementInput(input, event.metaKey?-10:-1);
+            this.incrementInput(input, this.amplifyStepFromEvent(event,-1));
             return;
         },
 
