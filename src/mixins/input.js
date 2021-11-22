@@ -4,19 +4,17 @@ export default {
             this.store(event.target.value);
         },
 
-        onUp(event) {
-            const input = event.target;
-            const max = input.getAttribute('max');
+        incrementInput(inputEl, step=1){
+            const max = inputEl.getAttribute('max');
 
             if (!max) {
                 return;
             }
 
-            let value = parseInt(input.value, 10);
-            let step = 1;
+            let value = parseInt(inputEl.value, 10);
 
             if (event.metaKey) {
-                step = 10;
+                step *= 10;
             }
 
             value = Math.min(value + step, max);
@@ -25,31 +23,30 @@ export default {
                 value = 0;
             }
 
-            this.store(value, input);
+            this.store(value, inputEl);
         },
 
+        // Keyboard up arrow press
+        onUp(event) {
+            const input = event.target;
+            this.incrementInput(input, 1);
+            return;
+        },
+
+        // Keyboard down arrow press
         onDown(event) {
             const input = event.target;
-            const min = input.getAttribute('min');
+            this.incrementInput(input, -1);
+            return;
+        },
 
-            if (!min) {
-                return;
             }
 
-            let value = parseInt(input.value, 10);
-            let step = 1;
 
-            if (event.metaKey) {
-                step = 10;
             }
 
-            value = Math.max(min, value - step);
 
-            if (value < 0) {
-                value = 0;
             }
 
-            this.store(value, input);
-        }
     }
 };
