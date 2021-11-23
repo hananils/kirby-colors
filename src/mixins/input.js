@@ -11,7 +11,7 @@ export default {
     },
 
     created() {
-        // Bind to the document, as it will not be fired when there is no hover on the item.
+        // Bind to the document, as it will not be fired when there is no hover on the item
         document.addEventListener('mouseup', this.onMouseUp);
         document.addEventListener('mousemove', this.onMouseDrag);
     },
@@ -95,5 +95,10 @@ export default {
             // Visually change the value without changing the store
             this.dragInputRef.value = newValue;
         }
+    },
+
+    unmounted() {
+        document.removeEventListener('mouseup', this.onMouseUp);
+        document.removeEventListener('mousemove', this.onMouseDrag);
     }
 };
