@@ -40,16 +40,18 @@ export default {
 
         // Keyboard up arrow press
         onUp(event) {
-            const input = event.target;
-            this.incrementInput(input, this.amplifyStepFromEvent(event, 1));
-            return;
+            this.incrementInput(
+                event.target,
+                this.amplifyStepFromEvent(event, 1)
+            );
         },
 
         // Keyboard down arrow press
         onDown(event) {
-            const input = event.target;
-            this.incrementInput(input, this.amplifyStepFromEvent(event, -1));
-            return;
+            this.incrementInput(
+                event.target,
+                this.amplifyStepFromEvent(event, -1)
+            );
         },
 
         // Function to handle changing values by incrementing with the mouse
@@ -69,9 +71,13 @@ export default {
             this.dragAmount = this.dragStart - event.pageY;
 
             // Apply color to store
-            this.dragInputRef.value = this.dragValue; // Needs to be reset so increment works. Note: Creates a lag in the value change.
-            if (this.dragInputRef && this.dragAmount !== 0)
+            this.dragInputRef.value = this.dragValue;
+
+            // Needs to be reset so increment works
+            // Note: Creates a lag in the value change
+            if (this.dragInputRef && this.dragAmount !== 0) {
                 this.incrementInput(this.dragInputRef, this.dragAmount);
+            }
 
             // Reset
             this.dragActive = false;
