@@ -1,7 +1,7 @@
 <template>
     <label class="k-colors-opacity">
         <input
-            ref="input"
+            ref="a"
             class="k-colors-input is-alpha"
             :value="opacity"
             data-unit="opacity"
@@ -12,7 +12,7 @@
             @keydown.up.prevent="onUp"
             @keydown.down.prevent="onDown"
         />
-        <span @mousedown.prevent="onMouseDown($event, $refs.input)">%</span>
+        <span @mousedown.prevent="onMouseDown($event, $refs.a)">%</span>
     </label>
 </template>
 
