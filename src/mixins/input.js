@@ -38,7 +38,7 @@ export default {
             this.store(value, inputEl);
         },
 
-        amplifyStepFromEvent(e, step = 1, amplification = 10) {
+        amplifyStepFromEvent(event, step = 1, amplification = 10) {
             return event && (event.metaKey || event.shiftKey)
                 ? step * amplification
                 : step;
