@@ -23,17 +23,11 @@ export default {
 
         incrementInput(inputEl, step = 1) {
             const max = inputEl.getAttribute('max');
-
-            if (!max) {
-                return;
-            }
+            if (!max) return;
 
             let value = parseInt(inputEl.value, 10);
             value = Math.min(value + step, max);
-
-            if (value < 0) {
-                value = 0;
-            }
+            if (value < 0) value = 0;
 
             this.store(value, inputEl);
         },
@@ -59,45 +53,47 @@ export default {
         },
 
         // Function to handle changing values by incrementing with the mouse
-        onMouseDown(e, inputRef) {
-            if (!this.dragActive && inputRef && e.pageY) {
+        onMouseDown(event, inputRef) {
+            if (!this.dragActive && inputRef && event.pageY) {
                 this.dragActive = true;
                 this.dragInputRef = inputRef;
-                this.dragStart = e.pageY;
+                this.dragStart = event.pageY;
                 this.dragValue = parseInt(inputRef.value, 10);
             }
         },
 
-        onMouseUp(e) {
-            if (this.dragActive && this.dragInputRef && e.pageY) {
-                // Get value
-                this.dragAmount = this.dragStart - e.pageY;
+        onMouseUp(event) {
+            if (!this.dragActive || !this.dragInputRef || !event.pageY) return;
 
-                // Apply color to store
-                this.dragInputRef.value = this.dragValue; // Needs to be reset so increment works. Note: Creates a lag in the value change.
-                if (this.dragInputRef && this.dragAmount !== 0)
-                    this.incrementInput(this.dragInputRef, this.dragAmount);
+            // Get value
+            this.dragAmount = this.dragStart - event.pageY;
 
-                // Reset
-                this.dragActive = false;
-                this.dragAmount = 0;
-                this.dragInputRef = null;
-                this.dragValue = null;
-            }
+            // Apply color to store
+            this.dragInputRef.value = this.dragValue; // Needs to be reset so increment works. Note: Creates a lag in the value change.
+            if (this.dragInputRef && this.dragAmount !== 0)
+                this.incrementInput(this.dragInputRef, this.dragAmount);
+
+            // Reset
+            this.dragActive = false;
+            this.dragAmount = 0;
+            this.dragInputRef = null;
+            this.dragValue = null;
         },
 
-        onMouseDrag(e) {
-            if (this.dragActive && this.dragInputRef && e.pageY) {
-                // Calculate value
-                const max = this.dragInputRef.getAttribute('max');
-                if (!max) return;
-                this.dragAmount = this.dragStart - e.pageY;
-                let newValue = Math.min(this.dragValue + this.dragAmount, max);
-                if (newValue < 0) newValue = 0;
+        onMouseDrag(event) {
+            if (!this.dragActive || !this.dragInputRef || !event.pageY) return;
 
-                // Visually change the value without changing the store
-                this.dragInputRef.value = newValue;
-            }
+            // Calculate value
+            const max = this.dragInputRef.getAttribute('max');
+            if (!max) return;
+
+            this.dragAmount = this.dragStart - event.pageY;
+
+            let newValue = Math.min(this.dragValue + this.dragAmount, max);
+            if (newValue < 0) newValue = 0;
+
+            // Visually change the value without changing the store
+            this.dragInputRef.value = newValue;
         }
     }
 };
