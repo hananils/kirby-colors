@@ -72,6 +72,11 @@ export default {
     width: 2.25rem;
     height: 2.25rem;
     border-right: 1px solid var(--color-border);
+    border-radius: 0.2rem;
+}
+
+.k-colors-preview .k-colors-color {
+    border-radius: 0.2rem 0 0 0.2rem;
 }
 
 .k-colors-picker {
