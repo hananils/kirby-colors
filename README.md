@@ -30,7 +30,7 @@ This field is provided under the type `colors`:
 
 ### Dynamic contrast options
 
-In order to set contrast colors, it possible to either query another field:
+In order to set contrast colors, it possible to query another field:
 
 ```
 colors:
