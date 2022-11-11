@@ -32,7 +32,7 @@ This field is provided under the type `colors`:
 
 In order to set contrast colors, it possible to query another field:
 
-```
+```yml
 colors:
     type: colors
     label: Colors
@@ -45,7 +45,7 @@ You will have to make sure that the references field returns either a single col
 
 If you'd like to reference a field on the same page as your colors field, you'll have to watch for changes in order to get live updates:
 
-```
+```yml
 colors:
     type: colors
     label: Colors
@@ -59,7 +59,7 @@ contrasts:
 
 If you need to split values of the watched field, you have to define the split character as well:
 
-```
+```yml
 colors:
     type: colors
     label: Colors
