@@ -30,6 +30,7 @@
             v-if="contrast !== false"
             :color="color"
             :contrast="contrast"
+            :contrastColors="contrastColors"
         />
     </k-field>
 </template>
@@ -58,6 +59,7 @@ export default {
         label: String,
         value: String,
         contrast: [Boolean, Array],
+        contrastColors: Array,
         readability: Boolean,
         alpha: Boolean,
         invalid: Boolean,

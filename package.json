@@ -4,6 +4,7 @@
     "description": "Colors is a field for Kirby 3 that allows the selection of a color using the native color selector. Colors can be viewed and edited in either HEX, RGB or HSL. Additionally, the field automatically calculates the most readable contrast color. This can be useful, if you'd like to specify background colors and would like to adjust the text colors accordingly. The field displays the color contrast ratings AA, AALarge, AAA and AAALarge according to WCAG accessibility guidelines.",
     "scripts": {
         "dev": "npx -y kirbyup src/index.js --watch",
+        "serve": "npx -y kirbyup serve src/index.js",
         "build": "npx -y kirbyup src/index.js",
         "lint": "eslint \"src/**/*.{js,vue}\"",
         "lint:fix": "npm run lint -- --fix",

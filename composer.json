@@ -3,7 +3,7 @@
     "description": "A color field for Kirby 3",
     "type": "kirby-plugin",
     "license": "MIT",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "authors": [
         {
             "name": "hana+nils · Büro für Gestaltung",
@@ -20,5 +20,10 @@
     },
     "require": {
         "getkirby/composer-installer": "^1.2"
+    },
+    "config": {
+        "allow-plugins": {
+            "getkirby/composer-installer": true
+        }
     }
 }

@@ -19,6 +19,58 @@ Kirby::plugin('hananils/kirby-colors', [
                     return $contrast;
                 }
             ],
+            'computed' => [
+                'contrastColors' => function () {
+                    $colors = $this->contrast;
+
+                    if ($colors === false) {
+                        return false;
+                    }
+
+                    if (isset($this->contrast['type'])) {
+                        $colors = true;
+                        $query = null;
+
+                        if (
+                            $this->contrast['type'] === 'query' &&
+                            isset($this->contrast['query'])
+                        ) {
+                            $query = $this->contrast['query'];
+                        } elseif (
+                            $this->contrast['type'] === 'watch' &&
+                            isset($this->contrast['field'])
+                        ) {
+                            $query = 'page.' . $this->contrast['field'];
+                        }
+
+                        if ($query) {
+                            $colors = $this->model()->query($query);
+
+                            if (isset($this->contrast['split'])) {
+                                $colors = explode(
+                                    $this->contrast['split'],
+                                    $colors
+                                );
+                            }
+
+                            if (!is_array($colors)) {
+                                $colors = [(string) $colors];
+                            }
+
+                            $colors = array_map('trim', $colors);
+                            $colors = array_filter($colors, function ($value) {
+                                return strlen($value) > 2;
+                            });
+                        }
+                    }
+
+                    if ($colors === true || empty($colors)) {
+                        return ['#fff', '#000'];
+                    }
+
+                    return $colors;
+                }
+            ],
             'save' => function ($value) {
                 return $value;
             }

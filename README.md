@@ -28,6 +28,50 @@ This field is provided under the type `colors`:
 -   `contrast`: allows you to enable or disable the contrast widget that calculated the most readable contrast color, either `true` or `false` or an array of colors the plugin should choose from.
 -   `default`: the color to be used as default, either in hex3, hex6, hex8, rgb, rgba, hsl or hsla.
 
+### Dynamic contrast options
+
+In order to set contrast colors, it possible to either query another field:
+
+```
+colors:
+    type: colors
+    label: Colors
+    contrast:
+      type: query
+      query: site.contrasts
+```
+
+You will have to make sure that the references field returns either a single color or an array of colors. Use methods like `split` to handle comma-separated strings, e. g. `site.constrasts.split`.
+
+If you'd like to reference a field on the same page as your colors field, you'll have to watch for changes in order to get live updates:
+
+```
+colors:
+    type: colors
+    label: Colors
+    contrast:
+      type: watch
+      field: contrasts
+contrasts:
+    type: text
+    label: Contrast colors
+```
+
+If you need to split values of the watched field, you have to define the split character as well:
+
+```
+colors:
+    type: colors
+    label: Colors
+    contrast:
+      type: watch
+      field: contrasts
+      split: ','
+contrasts:
+    type: text
+    label: Contrast colors
+```
+
 ### Examples
 
 ![example 1](./.github/screenshot1.png)
@@ -201,7 +245,7 @@ This plugin bundles two classes, one for JavaScript and one for PHP, with the id
 2. Click the arrow icon to switch between color spaces.
 3. When editing RGB or HSL colors, use the up and down arrow keys to adjust the value by +1 or -1.
 4. Hold the [meta key](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/metaKey) (or the shift key) to adjust values by +10 or -10.
-5. Click on the grey unit indicator of a value then drag the mouse vertically to adjust the values on the fly.  
+5. Click on the grey unit indicator of a value then drag the mouse vertically to adjust the values on the fly.
    ![Drag-to-increment feature](./.github/tip5-dragfeature.gif)
 
 ## Alternatives
@@ -210,5 +254,5 @@ Please note that there is another color field for Kirby 3 developed by Tim Ötti
 
 # License
 
-This plugin is provided freely under the [MIT license](LICENSE.md) by [hana+nils · Büro für Gestaltung](https://hananils.de).  
+This plugin is provided freely under the [MIT license](LICENSE.md) by [hana+nils · Büro für Gestaltung](https://hananils.de).
 We create visual designs for digital and analog media.

@@ -18,18 +18,13 @@
 export default {
     props: {
         color: Object,
-        contrast: [Boolean, Array]
+        contrast: [Boolean, Array],
+        contrastColors: Array
     },
 
     computed: {
         readable() {
-            let colors = this.contrast;
-
-            if (colors === true) {
-                colors = ['#fff', '#000'];
-            }
-
-            return this.color.toMostReadable(colors);
+            return this.color.toMostReadable(this.contrastColors);
         },
 
         rating() {
@@ -48,6 +43,60 @@ export default {
 
             const [readable] = this.readable;
             return readable.color.toString();
+        },
+
+        watching() {
+            // fallback colors
+            let contrasts = ['#fff', '#000'];
+
+            if (this.isWatching) {
+                let value =
+                    this.$store.getters['content/changes']()[
+                        this.contrast.field
+                    ];
+
+                if (value) {
+                    contrasts = value;
+
+                    if (!Array.isArray(value)) {
+                        if (this.contrast.split) {
+                            // split field value into separate colors
+                            contrasts = value.split(this.contrast.split);
+                        } else {
+                            // make sure color is in an array
+                            contrasts = [value];
+                        }
+                    }
+
+                    // trim color values and remove too short values
+                    contrasts = contrasts.map((color) => color.trim());
+                    contrasts = contrasts.filter((color) => color.length > 2);
+                }
+            }
+
+            return contrasts;
+        },
+
+        isWatching() {
+            return this.contrast?.type === 'watch' && this.contrast?.field;
+        },
+
+        hasChanges() {
+            return this.$store.getters['content/hasChanges']()[
+                this.contrast.field
+            ];
+        }
+    },
+
+    created() {
+        if (this.isWatching && this.hasChanges) {
+            this.contrastColors = this.watching;
+        }
+    },
+
+    watch: {
+        watching() {
+            this.contrastColors = this.watching;
         }
     }
 };
