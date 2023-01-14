@@ -10,7 +10,7 @@ Kirby::plugin('hananils/kirby-colors', [
                     return is_array($value) ? $value[0] : $value;
                 },
                 'help' => function ($help = null) {
-                    return $help;
+                    return I18n::translate($help, $help);
                 },
                 'alpha' => function (bool $alpha = false) {
                     return $alpha;
