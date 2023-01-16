@@ -59,7 +59,7 @@ export default {
         label: String,
         value: String,
         contrast: [Boolean, Array],
-        contrastColors: Array,
+        contrastColors: [Array, Boolean],
         readability: Boolean,
         alpha: Boolean,
         invalid: Boolean,
