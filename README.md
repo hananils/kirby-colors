@@ -41,7 +41,7 @@ colors:
         query: site.contrasts
 ```
 
-You will have to make sure that the references field returns either a single color or an array of colors. Use methods like `split` to handle comma-separated strings, e. g. `site.constrasts.split`.
+You will have to make sure that the references field returns either a single color or an array of colors. Use methods like `split` to handle comma-separated strings, e. g. `site.contrasts.split`.
 
 If you'd like to reference a field on the same page as your colors field, you'll have to watch for changes in order to get live updates:
 
