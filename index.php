@@ -2,7 +2,7 @@
 
 @include_once __DIR__ . '/vendor/autoload.php';
 
-Kirby::plugin('hananils/kirby-colors', [
+Kirby::plugin('hananils/colors', [
     'fields' => [
         'colors' => [
             'props' => [
