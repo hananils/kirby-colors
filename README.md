@@ -2,6 +2,9 @@
 
 **Colors** is a field for [Kirby 3](https://getkirby.com) that allows the selection of a color using the native color selector. Colors can be viewed and edited in either HEX, RGB or HSL. Additionally, the field automatically calculates the most readable contrast color. This can be useful, if you'd like to specify background colors and would like to adjust the text colors accordingly. The field displays the color contrast ratings AA, AALarge, AAA and AAALarge according to WCAG accessibility guidelines.
 
+> [!IMPORTANT]
+> With the release of version 4, Kirby now offers a core color field which offers similar options for color input. It should be used as an replacement for this plugin which is now deprecated. The one feature missing form the core field is color contrast checking. An new plugin for this purpose is in preparation.
+
 ## Installation
 
 ### Download
